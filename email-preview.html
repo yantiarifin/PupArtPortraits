@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Email Preview - PupArt Order Confirmation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #e0e0e0;
+        padding: 20px;
+      }
+      .font-lexend {
+        font-family: "Lexend", sans-serif;
+      }
+      .container {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        background: white;
+      }
+      .header {
+        background: #1e293b;
+        color: white;
+        padding: 30px;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+      }
+      .logo {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        letter-spacing: -0.025em;
+      }
+      .paw {
+        color: #06b6d4;
+      }
+      .pup {
+        color: #f43f5e;
+      }
+      .art {
+        color: #fbbf24;
+      }
+      .portraits {
+        color: white;
+        font-weight: 300;
+      }
+      .content {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 0 0 10px 10px;
+      }
+      .order-details {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+      }
+      .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .detail-row:last-child {
+        border-bottom: none;
+      }
+      .payment-box {
+        background: #fef3c7;
+        border: 2px solid #f59e0b;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 30px;
+        background: #0ea5e9;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 20px 0;
+      }
+      .footer {
+        text-align: center;
+        color: #666;
+        margin-top: 30px;
+        font-size: 14px;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/output.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <h2 style="text-align: center; color: #0ea5e9">
+      Email Preview - This is what customers will receive:
+    </h2>
+
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <i class="fa-solid fa-paw paw"></i> <span class="pup">PUP</span
+          ><span class="art">ART</span> <span class="portraits">portraits</span>
+        </div>
+      </div>
+
+      <div class="content">
+        <p>Hi Sarah Johnson,</p>
+        <p>
+          Thanks for your order. I'm excited to paint an awesome portrait of
+          <strong>Max</strong>!
+        </p>
+        <p>Here are the details of your order:</p>
+        <div class="order-details">
+          <h3 style="margin-top: 0">Order Details</h3>
+          <div class="detail-row">
+            <strong>Order ID:</strong>
+            <span>PUP-20250118-A3F2B1</span>
+          </div>
+          <div class="detail-row">
+            <strong>Dog Name:</strong>
+            <span>Max</span>
+          </div>
+          <div class="detail-row">
+            <strong>Portrait Type:</strong>
+            <span>New Portrait</span>
+          </div>
+          <div class="detail-row">
+            <strong>Total:</strong>
+            <span style="color: #0ea5e9; font-size: 18px"
+              ><strong>$89.99</strong></span
+            >
+          </div>
+        </div>
+
+        <!-- This yellow box only appears for Venmo payments -->
+        <div class="payment-box">
+          <h3>
+            Please complete your payment via Venmo so I can begin Max's
+            portrait:
+          </h3>
+          <ul style="margin: 10px 0">
+            <li>Send payment to: <strong>@yanti-arifin-franz</strong></li>
+            <li>Amount: <strong>$89.99</strong></li>
+            <li>
+              Include order ID <strong>PUP-20250118-A3F2B1</strong> in the
+              payment note
+            </li>
+          </ul>
+          <p style="margin-bottom: 0">
+            Your order will be processed once payment is received.
+          </p>
+        </div>
+
+        <h3 style="font-weight: 600">What's Next?</h3>
+        <p>
+          I'll reach out if I have any questions about Max's portrait. Please
+          allow up to one week to reeive a preview of the portrait. Once you
+          approve it, the print will be ordered and shipped within 2-3 days.
+        </p>
+        <br />
+        <p>Have a PAW-some day!</p>
+        <br />
+        Yanti Arifin Franz
+        <hr />
+        <div style="width: 100%; height: 2rem; margin-top: 2rem;"></div>
+
+        <div class="footer">
+          <p>Questions? Reply to email me at connect@pupartportraits.com or visit pupartportraits.com website.</p>
+          <p style="margin: 5px 0">Made with 💜 by Yanti - PupArt Portraits</p>
+          <p style="margin: 5px 0; font-size: 12px">
+            © 2025 Yanti Arifin Franz. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      style="
+        margin-top: 40px;
+        padding: 20px;
+        background: #f0f0f0;
+        border-radius: 8px;
+      "
+    >
+      <h3>Note:</h3>
+      <p>
+        The yellow payment box above only appears for Venmo orders. Credit card
+        orders won't show this section since they're already paid.
+      </p>
+    </div>
+  </body>
+</html>

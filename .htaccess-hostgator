@@ -1,0 +1,22 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Protect sensitive directories
+<FilesMatch "\.(json|log)$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
+# Protect PHP files in orders directory
+<Directory orders>
+    <FilesMatch "\.php$">
+        Order deny,allow
+        Deny from all
+    </FilesMatch>
+</Directory>
+
+# Basic security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>

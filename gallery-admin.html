@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Admin - PupArt Portraits</title>
+    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .config-editor {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 400px;
+            border: none;
+            outline: none;
+            resize: vertical;
+        }
+        .portrait-preview {
+            max-width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-3xl font-bold text-slate-800">Gallery Configuration</h1>
+                <a href="gallery.html" class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600 transition-colors">
+                    <i class="fas fa-eye mr-2"></i>View Gallery
+                </a>
+            </div>
+
+            <!-- Status Messages -->
+            <div id="status" class="hidden mb-4 p-4 rounded-lg"></div>
+
+            <!-- Visual Editor -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Portrait List -->
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold">Featured Portraits</h2>
+                        <button onclick="addPortrait()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                            <i class="fas fa-plus mr-2"></i>Add Portrait
+                        </button>
+                    </div>
+                    <div id="portraits-list" class="space-y-4">
+                        <!-- Portraits will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- JSON Editor -->
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold">JSON Configuration</h2>
+                        <div class="space-x-2">
+                            <button onclick="formatJSON()" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600 transition-colors">
+                                Format
+                            </button>
+                            <button onclick="saveConfig()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                                <i class="fas fa-save mr-2"></i>Save
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="config-editor" class="config-editor w-full" placeholder="Loading configuration..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentConfig = { featured: [] };
+
+        // Load configuration on page load
+        document.addEventListener('DOMContentLoaded', loadConfig);
+
+        async function loadConfig() {
+            try {
+                const response = await fetch('gallery-config.json');
+                currentConfig = await response.json();
+                updateUI();
+                showStatus('Configuration loaded successfully', 'success');
+            } catch (error) {
+                console.error('Failed to load config:', error);
+                showStatus('Failed to load configuration', 'error');
+                currentConfig = { featured: [] };
+                updateUI();
+            }
+        }
+
+        function updateUI() {
+            updatePortraitsList();
+            updateJSONEditor();
+        }
+
+        function updatePortraitsList() {
+            const container = document.getElementById('portraits-list');
+            container.innerHTML = '';
+
+            currentConfig.featured.forEach((portrait, index) => {
+                const portraitDiv = document.createElement('div');
+                portraitDiv.className = 'bg-slate-50 p-4 rounded-lg border';
+                portraitDiv.innerHTML = `
+                    <div class="flex items-start gap-4">
+                        <img src="portraits/previews/${portrait.name}-${portrait.date}-thumb.jpg"
+                             alt="${portrait.name}"
+                             class="portrait-preview"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0zNSA0MEg2NVY2MEgzNVY0MFoiIGZpbGw9IiM5Q0EzQUYiLz4KPC9zdmc+'">
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-lg">${portrait.name}</h3>
+                                <button onclick="removePortrait(${index})"
+                                        class="text-red-500 hover:text-red-700 text-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <p class="text-sm text-slate-600 mb-2">${portrait.description}</p>
+                            <div class="flex flex-wrap gap-1 mb-2">
+                                ${portrait.tags.map(tag => `<span class="bg-sky-100 text-sky-800 px-2 py-1 rounded text-xs">${tag}</span>`).join('')}
+                            </div>
+                            <div class="text-xs text-slate-500">
+                                Date: ${portrait.date} | Category: ${portrait.category}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(portraitDiv);
+            });
+        }
+
+        function updateJSONEditor() {
+            const editor = document.getElementById('config-editor');
+            editor.value = JSON.stringify(currentConfig, null, 2);
+        }
+
+        function addPortrait() {
+            const name = prompt('Portrait name:');
+            if (!name) return;
+
+            const date = prompt('Date (YYYY-MM-DD):', new Date().toISOString().split('T')[0]);
+            if (!date) return;
+
+            const description = prompt('Description:');
+            if (!description) return;
+
+            const category = prompt('Category (favorites/recent/featured):', 'favorites');
+            const tags = prompt('Tags (comma-separated):', 'favorites').split(',').map(tag => tag.trim());
+
+            const newPortrait = {
+                name,
+                date,
+                category,
+                tags,
+                description
+            };
+
+            currentConfig.featured.push(newPortrait);
+            updateUI();
+        }
+
+        function removePortrait(index) {
+            if (confirm('Remove this portrait from the gallery?')) {
+                currentConfig.featured.splice(index, 1);
+                updateUI();
+            }
+        }
+
+        function formatJSON() {
+            try {
+                const editor = document.getElementById('config-editor');
+                const parsed = JSON.parse(editor.value);
+                editor.value = JSON.stringify(parsed, null, 2);
+                currentConfig = parsed;
+                updatePortraitsList();
+                showStatus('JSON formatted successfully', 'success');
+            } catch (error) {
+                showStatus('Invalid JSON format', 'error');
+            }
+        }
+
+        async function saveConfig() {
+            try {
+                const editor = document.getElementById('config-editor');
+                const newConfig = JSON.parse(editor.value);
+
+                // Here you would typically send to a server endpoint
+                // For now, we'll just update the local config and show instructions
+                currentConfig = newConfig;
+                updatePortraitsList();
+
+                showStatus('Configuration updated! Note: To save permanently, copy the JSON below and update gallery-config.json file manually.', 'warning');
+                console.log('Updated config:', JSON.stringify(newConfig, null, 2));
+            } catch (error) {
+                showStatus('Invalid JSON format', 'error');
+            }
+        }
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.className = `mb-4 p-4 rounded-lg ${type === 'success' ? 'bg-green-100 text-green-800' :
+                                                      type === 'warning' ? 'bg-yellow-100 text-yellow-800' :
+                                                      'bg-red-100 text-red-800'}`;
+            status.textContent = message;
+            status.classList.remove('hidden');
+
+            setTimeout(() => {
+                status.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

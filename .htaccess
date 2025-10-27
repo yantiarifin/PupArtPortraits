@@ -1,0 +1,41 @@
+# Disable ModSecurity for Stripe payment processing
+<IfModule mod_security.c>
+  SecFilterEngine Off
+  SecFilterScanPOST Off
+</IfModule>
+
+<IfModule mod_security2.c>
+  SecRuleEngine Off
+</IfModule>
+
+# Enable URL rewriting
+RewriteEngine On
+
+# Redirect to HTTPS (uncomment when SSL is set up)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Protect sensitive directories
+<FilesMatch "\.(json|log)$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
+# Protect PHP files in orders directory
+<Directory orders>
+    <FilesMatch "\.php$">
+        Order deny,allow
+        Deny from all
+    </FilesMatch>
+</Directory>
+
+# Set upload limits
+php_value upload_max_filesize 10M
+php_value post_max_size 35M
+php_value max_execution_time 300
+php_value max_input_time 300
+
+# Security headers
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1; mode=block"

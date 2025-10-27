@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PupArt Admin - Order Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <header class="bg-slate-800 text-white p-3 sm:p-4">
+        <h1 class="text-lg sm:text-2xl font-bold">PupArt Order Management</h1>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-2 sm:p-6">
+        <!-- Login Form -->
+        <div id="loginForm" class="hidden max-w-md mx-auto mt-10 sm:mt-20 px-4">
+            <div class="bg-white rounded-lg shadow-lg p-6 sm:p-8">
+                <h2 class="text-xl sm:text-2xl font-bold mb-6 text-center">Admin Login</h2>
+                <form onsubmit="handleLogin(event)">
+                    <div class="mb-4">
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500"
+                            placeholder="Enter admin password"
+                            required
+                        />
+                    </div>
+                    <div id="loginError" class="hidden mb-4 p-3 bg-red-100 text-red-700 rounded-md text-sm"></div>
+                    <button
+                        type="submit"
+                        class="w-full bg-sky-500 text-white py-2 px-4 rounded-md hover:bg-sky-600 transition-colors"
+                    >
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
+                    </button>
+                </form>
+                <p class="mt-4 text-xs text-gray-500 text-center">
+                    Default password: pupart2025 (change in auth.php)
+                </p>
+            </div>
+        </div>
+
+        <!-- Orders List (shown after login) -->
+        <div id="ordersSection" class="hidden">
+            <!-- Mobile-friendly header -->
+            <div class="mb-6">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                    <h2 class="text-lg sm:text-xl font-semibold">Recent Orders</h2>
+
+                    <!-- Desktop buttons -->
+                    <div class="hidden sm:flex gap-2 items-center">
+                        <select id="sortBy" onchange="sortOrders()" class="px-3 py-2 border border-gray-300 rounded text-sm">
+                            <option value="date-desc">Date (Newest)</option>
+                            <option value="date-asc">Date (Oldest)</option>
+                            <option value="dog-asc">Dog Name (A-Z)</option>
+                            <option value="dog-desc">Dog Name (Z-A)</option>
+                            <option value="mode-new">New Portraits First</option>
+                            <option value="mode-existing">Existing First</option>
+                            <option value="status-pending">Pending First</option>
+                            <option value="status-completed">Completed First</option>
+                            <option value="status-shipped">Shipped First</option>
+                        </select>
+                        <button onclick="showCreateOrderForm()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                            <i class="fas fa-plus mr-2"></i>Create Order
+                        </button>
+                        <button onclick="loadOrders()" class="bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-600">
+                            <i class="fas fa-sync-alt mr-2"></i>Refresh
+                        </button>
+                        <button onclick="logout()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile controls -->
+                <div class="sm:hidden space-y-3">
+                    <select id="sortByMobile" onchange="sortOrders()" class="w-full px-3 py-2 border border-gray-300 rounded text-sm">
+                        <option value="date-desc">Date (Newest)</option>
+                        <option value="date-asc">Date (Oldest)</option>
+                        <option value="dog-asc">Dog Name (A-Z)</option>
+                        <option value="dog-desc">Dog Name (Z-A)</option>
+                        <option value="mode-new">New Portraits First</option>
+                        <option value="mode-existing">Existing First</option>
+                        <option value="status-pending">Pending First</option>
+                        <option value="status-completed">Completed First</option>
+                        <option value="status-shipped">Shipped First</option>
+                    </select>
+
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="showCreateOrderForm()" class="bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600 text-sm">
+                            <i class="fas fa-plus"></i> Create
+                        </button>
+                        <button onclick="loadOrders()" class="bg-sky-500 text-white px-3 py-2 rounded hover:bg-sky-600 text-sm">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                        <button onclick="logout()" class="bg-gray-500 text-white px-3 py-2 rounded hover:bg-gray-600 text-sm">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ordersList" class="space-y-4">
+                <p class="text-gray-500">Loading orders...</p>
+            </div>
+        </div>
+
+        <!-- Create Order Form -->
+        <div id="createOrderForm" class="hidden max-w-4xl mx-auto mt-6">
+            <div class="bg-white rounded-lg shadow-lg p-4 sm:p-8">
+                <div class="flex justify-between items-center mb-4 sm:mb-6">
+                    <h2 class="text-xl sm:text-2xl font-bold">Create New Order</h2>
+                    <button onclick="hideCreateOrderForm()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-lg sm:text-xl"></i>
+                    </button>
+                </div>
+
+                <form id="newOrderForm" onsubmit="createOrder(event)">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                        <!-- Customer Information -->
+                        <div class="space-y-3 sm:space-y-4">
+                            <h3 class="text-base sm:text-lg font-semibold">Customer Information</h3>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">First Name *</label>
+                                <input type="text" name="firstName" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Last Name *</label>
+                                <input type="text" name="lastName" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Email *</label>
+                                <input type="email" name="email" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Address</label>
+                                <input type="text" name="address" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">City</label>
+                                    <input type="text" name="city" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-1">State</label>
+                                    <input type="text" name="state" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">ZIP Code</label>
+                                <input type="text" name="zipCode" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                            </div>
+                        </div>
+
+                        <!-- Order Details -->
+                        <div class="space-y-3 sm:space-y-4">
+                            <h3 class="text-base sm:text-lg font-semibold">Order Details</h3>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Dog Name *</label>
+                                <input type="text" name="dogName" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Background</label>
+                                <select name="background" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                                    <option value="coral">Coral</option>
+                                    <option value="crimson">Crimson</option>
+                                    <option value="sunshine">Sunshine</option>
+                                    <option value="lemon">Lemon</option>
+                                    <option value="meadow">Meadow</option>
+                                    <option value="turquoise">Turquoise</option>
+                                    <option value="emerald">Emerald</option>
+                                    <option value="ocean">Ocean</option>
+                                    <option value="sky">Sky</option>
+                                    <option value="twilight">Twilight</option>
+                                    <option value="velvet">Velvet</option>
+                                    <option value="surprise me">Surprise Me</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Payment Method</label>
+                                <select name="paymentMethod" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm">
+                                    <option value="manual">Manual/Cash</option>
+                                    <option value="venmo">Venmo</option>
+                                    <option value="card">Credit Card</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Total Amount *</label>
+                                <input type="number" name="total" step="0.01" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm" placeholder="0.00">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Print Sizes & Quantities</label>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center gap-2">
+                                        <input type="number" name="qty_8x8" min="0" placeholder="0" class="w-16 px-2 py-1 border rounded text-sm">
+                                        <span class="text-xs sm:text-sm">8x8 prints ($28)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <input type="number" name="qty_10x10" min="0" placeholder="0" class="w-16 px-2 py-1 border rounded text-sm">
+                                        <span class="text-xs sm:text-sm">10x10 prints ($30)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <input type="number" name="qty_12x12" min="0" placeholder="0" class="w-16 px-2 py-1 border rounded text-sm">
+                                        <span class="text-xs sm:text-sm">12x12 prints ($36)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <input type="number" name="qty_20x20" min="0" placeholder="0" class="w-16 px-2 py-1 border rounded text-sm">
+                                        <span class="text-xs sm:text-sm">20x20 prints ($60)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <input type="number" name="qty_digital" min="0" placeholder="0" class="w-16 px-2 py-1 border rounded text-sm">
+                                        <span class="text-xs sm:text-sm">Digital ($20)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex flex-col sm:flex-row justify-end gap-3">
+                        <button type="button" onclick="hideCreateOrderForm()" class="w-full sm:w-auto px-6 py-2 border border-gray-300 rounded hover:bg-gray-50">
+                            Cancel
+                        </button>
+                        <button type="submit" class="w-full sm:w-auto px-6 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                            <i class="fas fa-plus mr-2"></i>Create Order
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Check authentication on page load
+        async function checkAuth() {
+            try {
+                const response = await fetch('api/auth.php');
+                const data = await response.json();
+
+                if (data.authenticated) {
+                    showOrdersSection();
+                    loadOrders();
+                } else {
+                    showLoginForm();
+                }
+            } catch (error) {
+                console.error('Auth check error:', error);
+                showLoginForm();
+            }
+        }
+
+        // Handle login
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+
+            try {
+                const response = await fetch('api/auth.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showOrdersSection();
+                    loadOrders();
+                    document.getElementById('password').value = '';
+                    errorDiv.classList.add('hidden');
+                } else {
+                    errorDiv.textContent = 'Invalid password. Please try again.';
+                    errorDiv.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                errorDiv.textContent = 'Login failed. Please try again.';
+                errorDiv.classList.remove('hidden');
+            }
+        }
+
+        // Logout function
+        function logout() {
+            // Clear session and reload page
+            fetch('api/auth.php?logout=true').then(() => {
+                window.location.reload();
+            });
+        }
+
+        // Show login form
+        function showLoginForm() {
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('ordersSection').classList.add('hidden');
+        }
+
+        // Show orders section
+        function showOrdersSection() {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('ordersSection').classList.remove('hidden');
+        }
+
+        // Store orders globally for sorting
+        let allOrders = [];
+
+        function sortOrders() {
+            // Get value from either desktop or mobile select
+            const sortBy = document.getElementById('sortBy')?.value ||
+                           document.getElementById('sortByMobile')?.value || 'date-desc';
+
+            // Sync both selects
+            if (document.getElementById('sortBy')) document.getElementById('sortBy').value = sortBy;
+            if (document.getElementById('sortByMobile')) document.getElementById('sortByMobile').value = sortBy;
+
+            const sortedOrders = [...allOrders];
+
+            switch(sortBy) {
+                case 'date-desc':
+                    sortedOrders.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                    break;
+                case 'date-asc':
+                    sortedOrders.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+                    break;
+                case 'dog-asc':
+                    sortedOrders.sort((a, b) => a.dogName.localeCompare(b.dogName));
+                    break;
+                case 'dog-desc':
+                    sortedOrders.sort((a, b) => b.dogName.localeCompare(a.dogName));
+                    break;
+                case 'mode-new':
+                    sortedOrders.sort((a, b) => {
+                        const aIsNew = a.mode === 'New portrait' || (a.photos && a.photos.length > 0);
+                        const bIsNew = b.mode === 'New portrait' || (b.photos && b.photos.length > 0);
+                        return bIsNew - aIsNew;
+                    });
+                    break;
+                case 'mode-existing':
+                    sortedOrders.sort((a, b) => {
+                        const aIsNew = a.mode === 'New portrait' || (a.photos && a.photos.length > 0);
+                        const bIsNew = b.mode === 'New portrait' || (b.photos && b.photos.length > 0);
+                        return aIsNew - bIsNew;
+                    });
+                    break;
+                case 'status-pending':
+                    sortedOrders.sort((a, b) => {
+                        const aStatus = a.shipped ? 2 : (a.completed ? 1 : 0);
+                        const bStatus = b.shipped ? 2 : (b.completed ? 1 : 0);
+                        return aStatus - bStatus;
+                    });
+                    break;
+                case 'status-completed':
+                    sortedOrders.sort((a, b) => {
+                        const aStatus = a.shipped ? 0 : (a.completed ? 2 : 1);
+                        const bStatus = b.shipped ? 0 : (b.completed ? 2 : 1);
+                        return bStatus - aStatus;
+                    });
+                    break;
+                case 'status-shipped':
+                    sortedOrders.sort((a, b) => {
+                        const aShipped = a.shipped || false;
+                        const bShipped = b.shipped || false;
+                        return bShipped - aShipped;
+                    });
+                    break;
+            }
+
+            displayOrders(sortedOrders);
+        }
+
+        async function loadOrders() {
+            try {
+                const response = await fetch('api/get-orders.php');
+                const orders = await response.json();
+                allOrders = orders;
+                sortOrders(); // Apply current sorting
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                document.getElementById('ordersList').innerHTML =
+                    '<p class="text-red-500">Error loading orders. Make sure the server is running.</p>';
+            }
+        }
+
+        function displayOrders(orders) {
+            const container = document.getElementById('ordersList');
+
+            if (!orders || orders.length === 0) {
+                container.innerHTML = '<p class="text-gray-500">No orders found.</p>';
+                return;
+            }
+
+            // Mobile-optimized order cards
+            container.innerHTML = orders.map(order => `
+                <div class="bg-white rounded-lg shadow p-3 sm:p-6">
+                    <!-- Header with order ID and mode badge -->
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                        <div class="flex-1">
+                            <h3 class="text-sm sm:text-lg font-semibold break-all">Order ${order.orderId}</h3>
+                            <p class="text-xs sm:text-sm text-gray-600">${order.timestamp}</p>
+                        </div>
+                        <span class="inline-block self-start px-2 sm:px-3 py-1 ${order.mode === 'New portrait' || (order.photos && order.photos.length > 0 && !order.mode) ? 'bg-orange-100 text-orange-800' : order.mode === 'Manual' ? 'bg-purple-100 text-purple-800' : 'bg-green-100 text-green-800'} rounded-full text-xs sm:text-sm">
+                            ${order.mode === 'New portrait' ? 'New' : (order.mode === 'Existing portrait' ? 'Existing' : (order.mode === 'Manual' ? 'Manual' : (order.photos && order.photos.length > 0 ? 'New' : 'Existing')))}
+                        </span>
+                    </div>
+
+                    <!-- Quick info for mobile -->
+                    <div class="mb-3 text-xs sm:text-sm">
+                        <p class="font-semibold">${order.dogName} - ${order.background}</p>
+                        <p>${order.shipping.firstName} ${order.shipping.lastName}</p>
+                        <p class="text-gray-600">${order.shipping.email}</p>
+                    </div>
+
+                    <!-- Collapsible details (visible on larger screens, toggle on mobile) -->
+                    <details class="sm:open" open>
+                        <summary class="sm:hidden cursor-pointer text-xs font-medium text-sky-600 mb-2">View Details</summary>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
+                            <div>
+                                <h4 class="font-semibold mb-1 sm:mb-2">Portrait Details</h4>
+                                <p><strong>Mode:</strong> ${order.mode || (order.photos && order.photos.length > 0 ? 'New Portrait' : 'Existing Portrait')}</p>
+                                <p><strong>Dog:</strong> ${order.dogName}</p>
+                                <p><strong>Background:</strong> ${order.background}</p>
+                                ${order.photos && order.photos.length > 0 ?
+                                    `<div class="mt-2">
+                                        <p class="font-semibold">Photos (${order.photos.length})</p>
+                                        <ul class="text-xs text-gray-600 mt-1 space-y-1">
+                                            ${order.photos.map(photo =>
+                                                `<li class="break-all truncate">• ${photo.split('/').pop()}</li>`
+                                            ).join('')}
+                                        </ul>
+                                    </div>` : ''}
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold mb-1 sm:mb-2">Shipping</h4>
+                                <div class="text-xs sm:text-sm">
+                                    <p>${order.shipping.address || ''}</p>
+                                    ${order.shipping.address2 ? `<p>${order.shipping.address2}</p>` : ''}
+                                    <p>${order.shipping.city}, ${order.shipping.state} ${order.shipping.zipCode || ''}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order items -->
+                        <div class="mt-3">
+                            <h4 class="font-semibold mb-1 text-xs sm:text-sm">Order Items</h4>
+                            <div class="text-xs sm:text-sm space-y-1">
+                                ${order.prints.map(item =>
+                                    `<p>• ${item.size} (${item.quantity}x) - $${(item.price * item.quantity).toFixed(2)}</p>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- Footer with payment and actions -->
+                    <div class="mt-3 pt-3 border-t">
+                        <!-- Payment info and total -->
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
+                            <div class="text-xs sm:text-sm">
+                                <span class="font-medium">Payment:</span> ${order.payment.method === 'venmo' ? 'Venmo' : 'Credit Card'}
+                                ${order.payment.venmoUsername ? `<span class="block sm:inline sm:ml-2 text-gray-600">@${order.payment.venmoUsername}</span>` : ''}
+                            </div>
+                            <div class="text-sm sm:text-lg font-semibold">
+                                Total: $${order.totals.total.toFixed(2)}
+                            </div>
+                        </div>
+
+                        <!-- Status and action buttons -->
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs sm:text-sm font-medium">Status:</span>
+                                <span class="px-2 py-1 rounded-full text-xs ${order.completed ? 'bg-green-100 text-green-800' : (order.shipped ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800')}">
+                                    ${order.completed ? 'Completed' : (order.shipped ? 'Shipped' : 'Pending')}
+                                </span>
+                            </div>
+
+                            <!-- Mobile-optimized buttons -->
+                            <div class="flex flex-wrap gap-2">
+                                ${!order.completed ? `
+                                <button onclick="updateOrderStatus('${order.orderId}', '${order.shipped ? 'completed' : 'shipped'}')"
+                                    class="flex-1 sm:flex-none px-2 sm:px-3 py-1 text-xs sm:text-sm rounded transition-colors ${order.shipped ? 'bg-green-500 hover:bg-green-600' : 'bg-blue-500 hover:bg-blue-600'} text-white">
+                                    <i class="fas ${order.shipped ? 'fa-check' : 'fa-shipping-fast'} sm:mr-1"></i>
+                                    <span class="hidden sm:inline">${order.shipped ? 'Mark Complete' : 'Mark Shipped'}</span>
+                                    <span class="sm:hidden">${order.shipped ? 'Complete' : 'Ship'}</span>
+                                </button>` : ''}
+
+                                <button onclick="updateOrderStatus('${order.orderId}', '${order.completed ? 'shipped' : (order.shipped ? 'pending' : 'pending')}')"
+                                    class="flex-1 sm:flex-none px-2 sm:px-3 py-1 text-xs sm:text-sm rounded transition-colors bg-gray-500 hover:bg-gray-600 text-white">
+                                    <i class="fas fa-undo sm:mr-1"></i>
+                                    <span class="hidden sm:inline">${order.completed ? 'Mark Shipped' : (order.shipped ? 'Mark Pending' : 'Reset')}</span>
+                                    <span class="sm:hidden">Reset</span>
+                                </button>
+
+                                <button onclick="deleteOrder('${order.orderId}')"
+                                    class="flex-1 sm:flex-none px-2 sm:px-3 py-1 text-xs sm:text-sm bg-red-500 hover:bg-red-600 text-white rounded transition-colors">
+                                    <i class="fas fa-trash sm:mr-1"></i>
+                                    <span class="hidden sm:inline">Delete</span>
+                                    <span class="sm:hidden">Del</span>
+                                </button>
+
+                                <button onclick="exportOrder('${order.orderId}')" class="flex-1 sm:flex-none px-2 sm:px-3 py-1 text-xs sm:text-sm bg-sky-500 hover:bg-sky-600 text-white rounded">
+                                    <i class="fas fa-download sm:mr-1"></i>
+                                    <span class="hidden sm:inline">Export</span>
+                                    <span class="sm:hidden">Export</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function exportOrder(orderId) {
+            // Find the order
+            fetch('api/get-orders.php')
+                .then(res => res.json())
+                .then(orders => {
+                    const order = orders.find(o => o.orderId === orderId);
+                    if (order) {
+                        const dataStr = JSON.stringify(order, null, 2);
+                        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+
+                        const exportFileDefaultName = `order-${orderId}.json`;
+
+                        const linkElement = document.createElement('a');
+                        linkElement.setAttribute('href', dataUri);
+                        linkElement.setAttribute('download', exportFileDefaultName);
+                        linkElement.click();
+                    }
+                });
+        }
+
+        async function deleteOrder(orderId) {
+            if (!confirm(`Are you sure you want to delete order ${orderId}?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch('api/delete-order.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ orderId })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    loadOrders();
+                } else {
+                    alert('Failed to delete order');
+                }
+            } catch (error) {
+                console.error('Error deleting order:', error);
+                alert('Error deleting order');
+            }
+        }
+
+        async function updateOrderStatus(orderId, newStatus) {
+            try {
+                const response = await fetch('api/update-order-status.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ orderId, status: newStatus })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    loadOrders();
+                } else {
+                    alert('Failed to update order status');
+                }
+            } catch (error) {
+                console.error('Error updating order status:', error);
+                alert('Error updating order status');
+            }
+        }
+
+        // Create order functions
+        function showCreateOrderForm() {
+            document.getElementById('createOrderForm').classList.remove('hidden');
+            // Scroll to form on mobile
+            document.getElementById('createOrderForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function hideCreateOrderForm() {
+            document.getElementById('createOrderForm').classList.add('hidden');
+            document.getElementById('newOrderForm').reset();
+        }
+
+        async function createOrder(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+
+            // Build order object
+            const order = {
+                mode: 'Manual',
+                dogName: formData.get('dogName'),
+                background: formData.get('background'),
+                photos: [],
+                existingPortrait: null,
+                prints: [],
+                shipping: {
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    email: formData.get('email'),
+                    address: formData.get('address'),
+                    city: formData.get('city'),
+                    state: formData.get('state'),
+                    zipCode: formData.get('zipCode')
+                },
+                payment: {
+                    method: formData.get('paymentMethod'),
+                    venmoUsername: null
+                },
+                totals: {
+                    subtotal: parseFloat(formData.get('total') || 0),
+                    shipping: 0,
+                    tax: 0,
+                    total: parseFloat(formData.get('total') || 0)
+                }
+            };
+
+            // Add print items
+            const printSizes = [
+                { name: 'qty_8x8', size: '8x8', price: 28 },
+                { name: 'qty_10x10', size: '10x10', price: 30 },
+                { name: 'qty_12x12', size: '12x12', price: 36 },
+                { name: 'qty_20x20', size: '20x20', price: 60 },
+                { name: 'qty_digital', size: 'Digital', price: 20 }
+            ];
+
+            printSizes.forEach(print => {
+                const qty = parseInt(formData.get(print.name) || 0);
+                if (qty > 0) {
+                    order.prints.push({
+                        size: print.size,
+                        quantity: qty,
+                        price: print.price
+                    });
+                }
+            });
+
+            try {
+                const response = await fetch('api/create-order.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(order)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    hideCreateOrderForm();
+                    loadOrders();
+                } else {
+                    alert('Failed to create order: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error creating order:', error);
+                alert('Error creating order');
+            }
+        }
+
+        // Initialize on page load
+        checkAuth();
+    </script>
+</body>
+</html>

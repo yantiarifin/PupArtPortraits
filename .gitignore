@@ -1,0 +1,48 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Development files
+node_modules/
+npm-debug.log
+*.log
+
+# Sensitive configuration
+api/config.php
+deploy.sh
+.env
+
+# Local development
+*.local
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# Upload directories (user content)
+uploads/
+orders/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Backup files
+*.backup
+*.bak
+
+# Test files (optional - remove if you want to track tests)
+test-checklist.html
+
+# Large portrait files - manage separately from Git
+portraits/*.jpg
+portraits/*.jpeg
+portraits/*.png
+portraits/no-bg/*.png
+portraits/previews/*.jpg
+*.zip

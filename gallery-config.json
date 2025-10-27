@@ -1,0 +1,40 @@
+{
+  "slides": [
+    {
+      "title": "Bella, Winston & Luna",
+      "description": "The dream team! A golden retriever, a bulldog, and a husky walk into a portrait studio... 🐕🎩🐺",
+      "portraits": [
+        {
+          "name": "Bella",
+          "date": "2025-07-17"
+        },
+        {
+          "name": "Winston",
+          "date": "2025-08-22"
+        },
+        {
+          "name": "Luna",
+          "date": "2025-06-14"
+        }
+      ]
+    },
+    {
+      "title": "Charlie, Max & Ruby",
+      "description": "The adventure squad! A beagle, a shepherd, and a border collie - brains, brawn, and boundless energy! 🎾🛡️🧠",
+      "portraits": [
+        {
+          "name": "Charlie",
+          "date": "2025-09-03"
+        },
+        {
+          "name": "Max",
+          "date": "2025-05-22"
+        },
+        {
+          "name": "Ruby",
+          "date": "2025-08-01"
+        }
+      ]
+    }
+  ]
+}

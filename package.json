@@ -1,0 +1,21 @@
+{
+  "name": "pupart",
+  "version": "1.0.0",
+  "description": "Before uploading, make these critical changes:",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "tailwindcss -i ./input.css -o ./output.css --watch",
+    "build": "tailwindcss -i ./input.css -o ./output.css --minify",
+    "update-portraits": "node scripts/resize.js && python3 generate_portraits_manifest.py"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "tailwindcss": "^4.1.13"
+  },
+  "dependencies": {
+    "sharp": "^0.34.3"
+  }
+}

@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- SEO -->
+    <title>Custom Dog Portraits | PupArt Portraits by Yanti</title>
+    <meta
+      name="description"
+      content="Order custom dog portraits from PupArt Portraits. Upload your pup’s photo and choose from unique backgrounds, prints, or digital art."
+    />
+    <meta
+      name="keywords"
+      content="dog portraits, custom pet art, pet portraits, dog wall art, PupArt Portraits"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.pupartportraits.com/" />
+    <meta
+      property="og:title"
+      content="Custom Dog Portraits | PupArt Portraits by Yanti"
+    />
+    <meta
+      property="og:description"
+      content="Turn your pup’s photo into timeless art. Prints, canvases, or digital files available."
+    />
+    <meta
+      property="og:image"
+      content="https://www.pupartportraits.com/portraits/previews/Ava-2025-08-03-thumb.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.pupartportraits.com/" />
+    <meta
+      name="twitter:title"
+      content="Custom Dog Portraits | PupArt Portraits by Yanti"
+    />
+    <meta
+      name="twitter:description"
+      content="Turn your pup’s photo into timeless art. Prints, canvases, or digital files available."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.pupartportraits.com/portraits/previews/Ava-2025-08-03-thumb.jpg"
+    />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Fonts & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/output.css" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Preload Hero Images -->
+    <link rel="preload" as="image" href="/images/sharethumb.png" />
+  </head>
+
+  <body class="bg-slate-50 text-slate-800 min-w-[320px]">
+    <!-- Skip to main content link for keyboard navigation -->
+    <a
+      href="#order"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-sky-500 text-white px-4 py-2 rounded-md font-medium"
+    >
+      Skip to main content
+    </a>
+
+    <!-- Header -->
+    <header class="bg-slate-800 w-full shadow-lg text-white sticky top-0 z-50">
+      <div class="mx-auto w-full px-4 py-4 flex items-center">
+        <!-- Back button wrapper - always visible container -->
+        <div class="min-w-[2rem] flex justify-start">
+          <button
+            id="backBtn"
+            class="hidden bg-lime-700 hover:bg-lime-900 text-white w-8 h-8 rounded-full transition-colors flex items-center justify-center text-sm"
+            title="Go back"
+          >
+            <i class="fas fa-arrow-up"></i>
+          </button>
+        </div>
+
+        <!-- Logo wrapper - full width for centering -->
+        <div class="w-full flex justify-center">
+          <div
+            class="logo text-rose-500 font-semibold text-2xl tracking-tight flex items-center"
+          >
+            <img
+              src="/images/nosebug.svg"
+              alt="PupArt icon"
+              class="inline h-8 md:h-10 mr-2 -mt-1"
+            />
+            PUP<span class="text-amber-400">ART</span>
+            <span class="text-white font-light">portraits&nbsp;</span>
+          </div>
+        </div>
+
+        <!-- Nav wrapper - flexible width but minimum to balance layout -->
+        <div class="min-w-[2rem] flex justify-end">
+          <!-- Mobile menu button -->
+          <button
+            id="mobileMenuBtn"
+            class="text-white w-8 h-8 flex items-center justify-center bg-transparent"
+            aria-label="Open menu"
+          >
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu" class="fixed inset-0 z-50 hidden">
+      <!-- Slide-out menu -->
+      <div
+        id="mobileMenuPanel"
+        class="absolute right-0 top-0 h-full w-64 bg-slate-800 shadow-2xl transform translate-x-full transition-transform duration-300"
+      >
+        <div class="p-6">
+          <!-- Close button -->
+          <button
+            id="mobileMenuClose"
+            class="absolute top-4 right-4 text-white p-2"
+            aria-label="Close menu"
+          >
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+
+          <!-- Menu items -->
+          <nav class="mt-12 flex flex-col gap-6">
+            <a
+              href="#"
+              onclick="event.preventDefault(); document.getElementById('gallery-modal').classList.remove('hidden'); loadGalleryGrid();"
+              class="text-white text-sm font-normal hover:text-amber-400 transition-colors">
+              <i class="fa-regular fa-images mr-3 w20"></i>Gallery
+            </a>
+            <a
+              href="#"
+              data-modal-target="pricesModal"
+              data-modal-toggle="pricesModal"
+              class="text-white text-sm font-normal hover:text-amber-400 transition-colors">
+              <i class="fa-regular fa-credit-card mr-3 w20"></i>Prices
+            </a>
+            <a
+              href="#"
+              data-modal-target=""
+              data-modal-toggle=""
+              class="text-white text-sm font-normal hover:text-amber-400 transition-colors">
+              <i class="fa-regular fa-file-lines mr-3 w20"></i>About
+            </a>
+            <a
+              href="#"
+              data-modal-target="contactModal"
+              data-modal-toggle="contactModal"
+              class="text-white text-sm font-normal hover:text-amber-400 transition-colors">
+              <i class="fa-solid fa-envelope mr-3 w20"></i>Contact
+            </a>
+
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <main id="order" class="m-0 w-full">
+      <!-- START -->
+      <section
+        id="start"
+        class="bg-velvet flex h-screen flex-col gap-12 items-center"
+      >
+        <div id="paradeStart" class="grid grid-cols-3 md:grid-cols-6">
+          <!-- Portrait images will be loaded dynamically by portrait-parade.js -->
+        </div>
+
+        <fieldset class="flex flex-col flex-wrap gap-2 sm:gap-6 shadow">
+          <a
+            href="#newPath"
+            id="newPortraitBtn"
+            class="hasExisting-btn px-6 py-3 rounded-md transition-colors text-md md:text-[1.2rem] inline-block text-center shadow-2xl"
+          >
+            Make a New Portrait
+          </a>
+          <a
+            href="#existingPanel"
+            id="existingPortraitBtn"
+            class="hasExisting-btn px-6 py-3 rounded-md transition-colors text-md md:text-[1.2rem] inline-block text-center shadow-2xl"
+          >
+            Order Prints of Existing Portrait
+          </a>
+        </fieldset>
+      </section>
+
+      <!-- New portrait form -->
+      <section
+        id="newPath"
+        class="bg-sunshine flex min-h-screen flex-col items-center hidden"
+      >
+        <div id="paradeNew" class="hidden md:grid grid-cols-3 md:grid-cols-6">
+          <!-- Portrait images will be loaded dynamically by portrait-parade.js -->
+        </div>
+
+        <form
+          id="newForm"
+          class="w-full h-full flex flex-col items-center justify-center py-4 px-2"
+          novalidate
+        >
+          <h4
+            class="text-[1.5rem] md:text-[2rem] text-slate-700 font-medium text-center tracking-tight shadow-sm p-2"
+          >
+            New Portrait Details
+          </h4>
+          <div class="w-fit text-center m-4">
+            <label class="text-lg font-medium"
+              >Upload up to 3 Photos <span class="text-rose-500">*</span></label
+            >
+            <p class="mt-1 text-sm text-slate-800 leading-tight">
+              Make sure photos are clear, in focus and well-lit where the face
+              is visible. JPG/PNG up to 10MB each.
+            </p>
+            <div class="my-4 flex flex-col items-center gap-4">
+              <label
+                for="photos"
+                class="bg-white cursor-pointer rounded-sm border border-dashed border-slate-300 p-4 hover:bg-slate-300 inline-block relative"
+              >
+                <span class="text-sm font-medium">Select Photos</span>
+                <input
+                  type="file"
+                  id="photos"
+                  accept="image/*"
+                  multiple
+                  class="sr-only"
+                />
+              </label>
+              <!-- Photo upload loader -->
+              <div id="photoLoader" class="hidden">
+                <div class="flex items-center gap-2">
+                  <div class="photo-spinner"></div>
+                  <span class="text-sm text-slate-600"
+                    >Processing photos...</span
+                  >
+                </div>
+              </div>
+              <div id="previews" class="flex gap-2"></div>
+
+              <!-- Dog name field - hidden until photos uploaded -->
+              <div id="dogNameSection" class="mt-2 hidden">
+                <label for="dogNameNew" class="block text-lg font-medium">
+                  Dog name <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  id="dogNameNew"
+                  class="mt-2 rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2"
+                  placeholder="Enter your dog's name"
+                  required
+                />
+                <p
+                  id="nameError"
+                  class="mt-1 text-sm bg-red-600 text-white p-3 rounded-md hidden"
+                >
+                  Please enter your dog's name.
+                </p>
+              </div>
+            </div>
+            <p
+              id="photoError"
+              class="mt-2 text-sm bg-red-600 text-white p-3 rounded-md hidden"
+            >
+              Please upload at least one valid photo.
+            </p>
+          </div>
+
+          <!-- BACKGROUND SELECTION REMOVED FOR NEW PORTRAITS -->
+          <div class="w-fit text-center mb-4 hidden">
+            <label class="text-xl font-medium"
+              >Select a background <span class="text-rose-500">*</span></label
+            >
+          </div>
+          <div
+            id="bgSection"
+            class="bg-white mb-10 rounded-md shadow-lg w-full max-w-4xl p-2 md:p-1 hidden"
+          >
+            <div
+              id="bgChoices"
+              role="listbox"
+              aria-label="Background choices"
+              class="grid grid-cols-3 md:grid-cols-6 gap-2 p-1 md:p-2"
+            >
+              <!-- simple color chips -->
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Coral"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-coral-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Coral
+              </button>
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Crimson"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-crimson-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Crimson
+              </button>
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Sunshine"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-sunshine-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Sunshine
+              </button>
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Lemon"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-lemon-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Lemon
+              </button>
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Meadow"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-meadow-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Meadow
+              </button>
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Turquoise"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-turquoise-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Turquoise
+              </button>
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Emerald"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-emerald-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Emerald
+              </button>
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Ocean"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-ocean-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Ocean
+              </button>
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Sky"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-sky-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Sky
+              </button>
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Twilight"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-twilight-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Twilight
+              </button>
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Velvet"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-velvet-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Velvet
+              </button>
+
+
+              <button
+                type="button"
+                role="option"
+                aria-checked="false"
+                data-value="Surprise"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-noselect-preview.png)] text-slate-600 text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+              >
+                Surprise Me
+              </button>
+            </div>
+            <p
+              id="bgError"
+              class="mt-1 text-sm bg-red-600 text-white p-3 rounded-md hidden"
+            >
+              Please select a background color.
+            </p>
+          </div>
+
+          <!-- Validation Summary -->
+          <div
+            id="validationSummary"
+            class="hidden p-4 bg-rose-50 border border-rose-200 rounded-md"
+          >
+            <h4 class="text-sm font-semibold text-rose-800 mb-2">
+              Please complete the following:
+            </h4>
+            <ul
+              id="validationList"
+              class="text-sm text-rose-700 space-y-1"
+            ></ul>
+          </div>
+
+          <!-- Continue Button -->
+          <div class="p-4 mb-10">
+            <button
+              id="continueToOrderBtn"
+              type="hasExisting-btn"
+              class="w-full shadow-lg"
+            >
+              Continue to Order Selection
+            </button>
+            <p class="mt-2 text-xs text-slate-800">
+              Complete all required fields above to continue.
+            </p>
+          </div>
+        </form>
+      </section>
+
+      <!-- EXISTING -->
+      <section
+        id="existingPanel"
+        class="bg-sunshine min-h-screen flex flex-col items-center hidden"
+      >
+        <div
+          id="paradeExisting"
+          class="hidden md:grid grid-cols-3 md:grid-cols-6"
+        >
+          <!-- Portrait images will be loaded dynamically by portrait-parade.js -->
+        </div>
+
+        <div
+          class="w-full h-full p-6 flex flex-col justify-center items-center"
+        >
+          <h2
+            class="text-[1.5rem] md:text-[3rem] text-slate-700 font-semibold text-center tracking-tight shadow-sm p-2"
+          >
+            Let's find your pup
+          </h2>
+
+          <div class="spacing-y-2 py-4">
+            <div class="flex flex-col items-center gap-4">
+              <label
+                for="petName"
+                class="block text-lg font-medium text-center max-w-xl"
+                >Dog's name <span class="text-rose-500">*</span>
+                <p class="text-sm font-normal text-slate-700">
+                  You may see multiple portraits with the same name. Simply
+                  select the correct one.
+                </p>
+              </label>
+
+              <div class="flex items-center gap-2">
+                <input
+                  id="petName"
+                  class="p-3 w-full rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500"
+                  placeholder="e.g., Lily"
+                />
+                <button
+                  id="findPortraitBtn"
+                  type="button"
+                  class="p-3 w-12 h-12 flex items-center justify-center"
+                  title="Find portrait"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="existingList"
+            class="flex items-center h-fit space-x-2"
+          ></div>
+
+          <div id="existingResult" class="mt-6 flex flex-col items-center">
+            <div class="my-4 flex flex-col gap-4">
+              <p id="existingMeta" class="text-sm text-slate-600 hidden"></p>
+
+              <!-- Optional background change checkbox -->
+              <div class="flex items-center gap-3 justify-center">
+                <input
+                  type="checkbox"
+                  id="changeBackgroundCheck"
+                  class="w-4 h-4 text-sky-500 border-slate-300 rounded focus:ring-sky-500"
+                />
+                <label
+                  for="changeBackgroundCheck"
+                  class="text-sm text-slate-700 cursor-pointer"
+                >
+                  I'd like to change the background
+                </label>
+              </div>
+
+              <div class="flex gap-3 items-center w-full">
+                <button
+                  id="confirmExistingBtn"
+                  type="button"
+                  disabled
+                  class="w-full"
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p
+            id="existingError"
+            class="mt-4 text-sm bg-red-600 text-white p-3 rounded-md hidden"
+          ></p>
+        </div>
+      </section>
+
+      <!-- EXISTING PORTRAIT BACKGROUND SELECTION -->
+      <section
+        id="existingBackgroundPanel"
+        class="bg-sunshine min-h-screen flex flex-col items-center hidden"
+      >
+        <div
+          id="paradeExistingBg"
+          class="hidden md:grid grid-cols-3 md:grid-cols-6"
+        >
+          <!-- Portrait images will be loaded dynamically by portrait-parade.js -->
+        </div>
+
+        <div
+          class="w-full max-w-4xl h-full flex flex-col items-center justify-center py-4"
+        >
+          <h2
+            class="text-[1.5rem] md:text-[3rem] text-slate-700 font-semibold text-center tracking-tight shadow-sm p-2 mb-8"
+          >
+            Choose Your Background
+          </h2>
+
+          <!-- Preview Canvas Area -->
+          <div id="bgPreviewArea" class="mb-6 hidden">
+            <div class="bg-white p-4 rounded-lg shadow-lg">
+              <canvas
+                id="bgPreviewCanvas"
+                width="200"
+                height="200"
+                class="mx-auto rounded-lg"
+              ></canvas>
+            </div>
+          </div>
+
+          <div class="w-full text-center mb-4">
+            <div
+              id="existingBgSection"
+              class="bg-white p-4 mb-10 rounded-md shadow-lg"
+            >
+              <div
+                id="existingBgChoices"
+                role="listbox"
+                aria-label="Background choices"
+                class="mt-2 grid grid-cols-3 md:grid-cols-6 gap-2 p-1 md:p-2"
+              >
+                <!-- simple color chips -->
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Coral"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-coral-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Coral
+                </button>
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Crimson"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-crimson-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Crimson
+                </button>
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Sunshine"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-sunshine-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Sunshine
+                </button>
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Lemon"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-lemon-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Lemon
+                </button>
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Meadow"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-meadow-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Meadow
+                </button>
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Emerald"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-emerald-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Emerald
+                </button>
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Turquoise"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-turquoise-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Turquoise
+                </button>
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Sky"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-sky-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Sky
+                </button>
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Ocean"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-ocean-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Ocean
+                </button>
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Twilight"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-twilight-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Twilight
+                </button>
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Velvet"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-velvet-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Velvet
+                </button>
+
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Linen"
+                class="w-full aspect-square rounded-md bg-[url(/images/bg-linen-preview.png)] text-slate-600 text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Linen
+                </button>
+
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Stormy"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-stormy-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Storm
+                </button>
+
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Charcoal"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-charcoal-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Charcoal
+                </button>
+
+
+                <button
+                  type="button"
+                  role="option"
+                  aria-checked="false"
+                  data-value="Surprise"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-noselect-preview.png)] text-slate-600 text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                >
+                  Surprise Me
+                </button>
+              </div>
+              <p
+                id="existingBgError"
+                class="mt-1 text-sm bg-red-600 text-white p-3 rounded-md hidden"
+              >
+                Please select a background color.
+              </p>
+            </div>
+          </div>
+
+          <!-- Continue Button -->
+          <div class="p-4 mb-10">
+            <button
+              id="continueFromExistingBgBtn"
+              type="button"
+              class="w-full"
+              disabled
+            >
+              Continue to Order Selection
+            </button>
+            <p class="mt-2 text-xs text-slate-800">
+              Select a background color above to continue.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SELECT PRINTS -->
+      <section
+        id="prints"
+        class="bg-turquoise min-h-screen flex flex-col items-center hidden"
+      >
+        <div class="w-full max-w-7xl px-6 py-8">
+          <h2
+            class="text-[1.5rem] md:text-[3rem] text-slate-700 font-semibold text-center tracking-tight shadow-sm p-2 mb-8"
+          >
+            Make Your Selections
+          </h2>
+
+          <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Select Prints - Left Side on desktop -->
+            <div class="w-full">
+              <div
+                id="print-selection-form"
+                class="p-6 ring-1 ring-slate-200 bg-white rounded shadow-lg max-w-lg mx-auto"
+              >
+                <div class="w-full">
+                  <div class="w-full flex flex-col sm:flex-row gap-6">
+                    <!-- Selections on right -->
+                    <div class="flex-1">
+                      <!-- Header row -->
+                      <div
+                        class="flex w-full items-center p-3 border-b border-slate-200 mb-2"
+                      >
+                        <div
+                          class="flex-1 text-base font-medium text-slate-600"
+                        >
+                          Size
+                        </div>
+                        <div
+                          class="narrow-col text-base font-medium text-slate-600 text-center sm:text-left"
+                        >
+                          Price
+                        </div>
+                        <div
+                          class="narrow-col end text-base font-medium text-slate-600"
+                        >
+                          Quantity
+                        </div>
+                      </div>
+
+                      <form id="printForm">
+                        <!-- PRINTS SECTION -->
+                        <div
+                          class="bg-slate-200 hover:bg-slate-300 transition-colors duration-200 px-3 py-2 mb-2 rounded flex items-center justify-between gap-2 cursor-pointer"
+                          onclick="showInfoModal('prints')"
+                          title="What is a print?"
+                        >
+                          <h4 class="text-sm font-semibold text-slate-700">
+                            Prints
+                          </h4>
+                          <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+
+                        <!-- 8 x 8 Print -->
+                        <div
+                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                        >
+                          <div class="flex-1">
+                            <label
+                              class="flex items-center gap-2 whitespace-nowrap"
+                            >
+                              <input
+                                type="checkbox"
+                                name="size"
+                                value="print-8x8"
+                                data-price="25"
+                                class="sizeOption"
+                              />
+                              8 × 8
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500"
+                              >$25<span class="hidden sm:inline">
+                                each</span
+                              ></span
+                            >
+                          </div>
+                          <div class="narrow-col end">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <label
+                                class="text-sm text-slate-600 hidden sm:inline"
+                                >Qty:</label
+                              >
+                              <input
+                                type="number"
+                                name="qty_print_8x8"
+                                min="1"
+                                value="1"
+                                class="w-12 sm:w-16 rounded-md border border-slate-300 qtyInput px-1 sm:px-2 py-1 text-center sm:text-left h-8"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 10 x 10 Print -->
+                        <div
+                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                        >
+                          <div class="flex-1">
+                            <label
+                              class="flex items-center gap-2 whitespace-nowrap"
+                            >
+                              <input
+                                type="checkbox"
+                                name="size"
+                                value="print-10x10"
+                                data-price="30"
+                                class="sizeOption"
+                              />
+                              10 × 10
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500"
+                              >$30<span class="hidden sm:inline">
+                                each</span
+                              ></span
+                            >
+                          </div>
+                          <div class="narrow-col end">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <label
+                                class="text-sm text-slate-600 hidden sm:inline"
+                                >Qty:</label
+                              >
+                              <input
+                                type="number"
+                                name="qty_print_10x10"
+                                min="1"
+                                value="1"
+                                class="w-12 sm:w-16 rounded-md border border-slate-300 qtyInput px-1 sm:px-2 py-1 text-center sm:text-left h-8"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 12 x 12 Print -->
+                        <div
+                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                        >
+                          <div class="flex-1">
+                            <label
+                              class="flex items-center gap-2 whitespace-nowrap"
+                            >
+                              <input
+                                type="checkbox"
+                                name="size"
+                                value="print-12x12"
+                                data-price="40"
+                                class="sizeOption"
+                              />
+                              12 × 12
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500"
+                              >$40<span class="hidden sm:inline">
+                                each</span
+                              ></span
+                            >
+                          </div>
+                          <div class="narrow-col end">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <label
+                                class="text-sm text-slate-600 hidden sm:inline"
+                                >Qty:</label
+                              >
+                              <input
+                                type="number"
+                                name="qty_print_12x12"
+                                min="1"
+                                value="1"
+                                class="w-12 sm:w-16 rounded-md border border-slate-300 qtyInput px-1 sm:px-2 py-1 text-center sm:text-left h-8"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 20 x 20 Print -->
+                        <div
+                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                        >
+                          <div class="flex-1">
+                            <label
+                              class="flex items-center gap-2 whitespace-nowrap"
+                            >
+                              <input
+                                type="checkbox"
+                                name="size"
+                                value="print-20x20"
+                                data-price="100"
+                                class="sizeOption"
+                              />
+                              20 × 20
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500"
+                              >$100<span class="hidden sm:inline">
+                                each</span
+                              ></span
+                            >
+                          </div>
+                          <div class="narrow-col end">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <label
+                                class="text-sm text-slate-600 hidden sm:inline"
+                                >Qty:</label
+                              >
+                              <input
+                                type="number"
+                                name="qty_print_20x20"
+                                min="1"
+                                value="1"
+                                class="w-12 sm:w-16 rounded-md border border-slate-300 qtyInput px-1 sm:px-2 py-1 text-center sm:text-left h-8"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Test Option (hidden by default, shown only in test mode) -->
+                        <div
+                          id="testOption"
+                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300 hidden"
+                        >
+                          <div class="flex-1">
+                            <label
+                              class="flex items-center gap-2 whitespace-nowrap"
+                            >
+                              <input
+                                type="checkbox"
+                                name="size"
+                                value="print-test"
+                                data-price="1"
+                                class="sizeOption"
+                              />
+                              Test Option
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500"
+                              >$1<span class="hidden sm:inline">
+                                each</span
+                              ></span
+                            >
+                          </div>
+                          <div class="narrow-col end">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <label
+                                class="text-sm text-slate-600 hidden sm:inline"
+                                >Qty:</label
+                              >
+                              <input
+                                type="number"
+                                name="qty_print_test"
+                                min="1"
+                                value="1"
+                                class="w-12 sm:w-16 rounded-md border border-slate-300 qtyInput px-1 sm:px-2 py-1 text-center sm:text-left h-8"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- FRAMED SECTION -->
+                        <div
+                          class="bg-slate-200 hover:bg-slate-300 transition-colors duration-200 px-3 py-2 mb-2 mt-4 rounded flex items-center justify-between gap-2 cursor-pointer"
+                          onclick="showInfoModal('framed')"
+                          title="What is a framed print?"
+                        >
+                          <h4 class="text-sm font-semibold text-slate-700">
+                            Framed
+                          </h4>
+                          <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+
+                        <!-- 8 x 8 Framed -->
+                        <div
+                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                        >
+                          <div class="flex-1">
+                            <label
+                              class="flex items-center gap-2 whitespace-nowrap"
+                            >
+                              <input
+                                type="checkbox"
+                                name="size"
+                                value="framed-8x8"
+                                data-price="100"
+                                class="sizeOption"
+                              />
+                              8 × 8
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500"
+                              >$100<span class="hidden sm:inline">
+                                each</span
+                              ></span
+                            >
+                          </div>
+                          <div class="narrow-col end">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <label
+                                class="text-sm text-slate-600 hidden sm:inline"
+                                >Qty:</label
+                              >
+                              <input
+                                type="number"
+                                name="qty_framed_8x8"
+                                min="1"
+                                value="1"
+                                class="w-12 sm:w-16 rounded-md border border-slate-300 qtyInput px-1 sm:px-2 py-1 text-center sm:text-left h-8"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 10 x 10 Framed -->
+                        <div
+                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                        >
+                          <div class="flex-1">
+                            <label
+                              class="flex items-center gap-2 whitespace-nowrap"
+                            >
+                              <input
+                                type="checkbox"
+                                name="size"
+                                value="framed-10x10"
+                                data-price="120"
+                                class="sizeOption"
+                              />
+                              10 × 10
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500"
+                              >$120<span class="hidden sm:inline">
+                                each</span
+                              ></span
+                            >
+                          </div>
+                          <div class="narrow-col end">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <label
+                                class="text-sm text-slate-600 hidden sm:inline"
+                                >Qty:</label
+                              >
+                              <input
+                                type="number"
+                                name="qty_framed_10x10"
+                                min="1"
+                                value="1"
+                                class="w-12 sm:w-16 rounded-md border border-slate-300 qtyInput px-1 sm:px-2 py-1 text-center sm:text-left h-8"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- CANVAS SECTION -->
+                        <div
+                          class="bg-slate-200 hover:bg-slate-300 transition-colors duration-200 px-3 py-2 mb-2 mt-4 rounded flex items-center justify-between gap-2 cursor-pointer"
+                          onclick="showInfoModal('canvas')"
+                          title="What is a canvas print?"
+                        >
+                          <h4 class="text-sm font-semibold text-slate-700">
+                            Canvas
+                          </h4>
+                          <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+
+                        <!-- 16 x 16 Canvas -->
+                        <div
+                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                        >
+                          <div class="flex-1">
+                            <label
+                              class="flex items-center gap-2 whitespace-nowrap"
+                            >
+                              <input
+                                type="checkbox"
+                                name="size"
+                                value="canvas-16x16"
+                                data-price="160"
+                                class="sizeOption"
+                              />
+                              16 × 16
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500"
+                              >$160<span class="hidden sm:inline">
+                                each</span
+                              ></span
+                            >
+                          </div>
+                          <div class="narrow-col end">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <label
+                                class="text-sm text-slate-600 hidden sm:inline"
+                                >Qty:</label
+                              >
+                              <input
+                                type="number"
+                                name="qty_canvas_16x16"
+                                min="1"
+                                value="1"
+                                class="w-12 sm:w-16 rounded-md border border-slate-300 qtyInput px-1 sm:px-2 py-1 text-center sm:text-left h-8"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 20 x 20 Canvas -->
+                        <div
+                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                        >
+                          <div class="flex-1">
+                            <label
+                              class="flex items-center gap-2 whitespace-nowrap"
+                            >
+                              <input
+                                type="checkbox"
+                                name="size"
+                                value="canvas-20x20"
+                                data-price="200"
+                                class="sizeOption"
+                              />
+                              20 × 20
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500"
+                              >$200<span class="hidden sm:inline">
+                                each</span
+                              ></span
+                            >
+                          </div>
+                          <div class="narrow-col end">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <label
+                                class="text-sm text-slate-600 hidden sm:inline"
+                                >Qty:</label
+                              >
+                              <input
+                                type="number"
+                                name="qty_canvas_20x20"
+                                min="1"
+                                value="1"
+                                class="w-12 sm:w-16 rounded-md border border-slate-300 qtyInput px-1 sm:px-2 py-1 text-center sm:text-left h-8"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Digital Only -->
+                        <div class="bg-slate-200 px-3 py-2 mb-2 mt-4 rounded">
+                          <h4 class="text-sm font-semibold text-slate-700">
+                            Digital
+                          </h4>
+                        </div>
+
+                        <div
+                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                        >
+                          <div class="flex-1">
+                            <label class="flex items-center gap-2">
+                              <input
+                                type="checkbox"
+                                id="digitalOnly"
+                                data-price="20"
+                              />
+                              Hi-res digital file
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500">$20</span>
+                          </div>
+                          <div class="narrow-col">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <!-- Quantity hidden for digital file -->
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="mt-6 text-right">
+                          <p class="text-lg font-semibold">
+                            Total: <span id="totalPrice">$0</span>
+                          </p>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Summary - Right Side on desktop -->
+            <aside class="lg:w-1/3">
+              <div
+                id="summarybox"
+                class="bg-white rounded-md shadow-lg ring-1 ring-slate-200 p-6 h-full lg:sticky lg:top-20"
+              >
+                <h4 class="text-lg font-semibold">Order summary</h4>
+                <dl class="mt-4 space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <dt>Mode</dt>
+                    <dd id="sumMode" class="font-medium">New portrait</dd>
+                  </div>
+                  <div class="flex justify-between">
+                    <dt>Dog</dt>
+                    <dd id="sumDog" class="font-medium">—</dd>
+                  </div>
+                  <div class="flex justify-between">
+                    <dt>Background</dt>
+                    <dd id="sumBG" class="font-medium">—</dd>
+                  </div>
+                  <hr class="border-slate-200 my-2" />
+                  <div class="flex justify-between">
+                    <dt>Prints subtotal</dt>
+                    <dd id="sumSubtotal">$0</dd>
+                  </div>
+                  <div class="flex justify-between text-slate-500">
+                    <dt>Tax</dt>
+                    <dd id="sumTax">$0</dd>
+                  </div>
+                  <div class="flex justify-between text-slate-500">
+                    <dt>Shipping</dt>
+                    <dd id="sumShip">$0</dd>
+                  </div>
+                  <hr class="border-slate-200 my-2" />
+                  <div class="flex justify-between text-base">
+                    <dt class="font-semibold">Total</dt>
+                    <dd id="sumTotal" class="font-semibold">$0</dd>
+                  </div>
+                </dl>
+
+                <div class="mt-6">
+                  <button id="proceedToCheckoutBtn" class="w-full" disabled>
+                    Proceed to Checkout
+                  </button>
+                  <p class="mt-2 text-xs text-slate-500">
+                    Complete your shipping and payment information.
+                  </p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- SHIPPING & PAYMENT -->
+      <section
+        id="checkout"
+        class="bg-coral min-h-screen flex flex-col items-center hidden"
+      >
+        <div class="w-full max-w-4xl px-6 py-8">
+          <h2
+            class="text-[1.5rem] md:text-[3rem] text-slate-700 font-semibold text-center tracking-tight shadow-sm p-2 mb-8"
+          >
+            Shipping & Payment
+          </h2>
+
+          <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Shipping & Payment Forms - Left Side -->
+            <div class="lg:w-2/3">
+              <!-- Shipping Information -->
+              <div
+                class="bg-white rounded-xl shadow-sm ring-1 ring-slate-200 p-6 mb-6"
+              >
+                <h3 class="text-lg font-semibold mb-4">Shipping Information</h3>
+                <form id="shippingForm" class="space-y-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label
+                        for="firstName"
+                        class="block text-sm font-medium text-slate-700 mb-1"
+                      >
+                        First Name <span class="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        required
+                        class="w-full rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        for="lastName"
+                        class="block text-sm font-medium text-slate-700 mb-1"
+                      >
+                        Last Name <span class="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        required
+                        class="w-full rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      for="email"
+                      class="block text-sm font-medium text-slate-700 mb-1"
+                    >
+                      Email Address <span class="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      class="w-full rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      for="address"
+                      class="block text-sm font-medium text-slate-700 mb-1"
+                    >
+                      Address <span class="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="address"
+                      name="address"
+                      required
+                      placeholder="Street address"
+                      class="w-full rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      for="city"
+                      class="block text-sm font-medium text-slate-700 mb-1"
+                    >
+                      City <span class="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="city"
+                      name="city"
+                      required
+                      class="w-full rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2"
+                    />
+                  </div>
+
+                  <div class="flex gap-4">
+                    <div class="flex-1">
+                      <label
+                        for="state"
+                        class="block text-sm font-medium text-slate-700 mb-1"
+                      >
+                        State <span class="text-rose-500">*</span>
+                      </label>
+                      <select
+                        id="state"
+                        name="state"
+                        required
+                        class="w-full rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2"
+                      >
+                        <option value="">Select State</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                      </select>
+                    </div>
+                    <div class="flex-1">
+                      <label
+                        for="zipCode"
+                        class="block text-sm font-medium text-slate-700 mb-1"
+                      >
+                        ZIP Code <span class="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="zipCode"
+                        name="zipCode"
+                        required
+                        class="w-full rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2"
+                      />
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Payment Information -->
+              <div
+                class="bg-white rounded-xl shadow-sm ring-1 ring-slate-200 p-6"
+              >
+                <h3 class="text-lg font-semibold mb-4">Payment Information</h3>
+
+                <!-- Payment Method Selection -->
+                <div class="mb-6">
+                  <label class="block text-sm font-medium text-slate-700 mb-3">
+                    Choose Payment Method <span class="text-rose-500">*</span>
+                  </label>
+                  <div class="flex gap-4">
+                    <label class="relative flex-1">
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="card"
+                        id="cardOption"
+                        class="sr-only peer"
+                        checked
+                      />
+                      <div
+                        class="p-4 border border-slate-300 rounded-md cursor-pointer peer-checked:border-sky-500 peer-checked:ring-2 peer-checked:ring-sky-200 hover:border-slate-400"
+                      >
+                        <div class="flex items-center gap-3">
+                          <img
+                            src="images/all-logos.svg"
+                            alt="Credit Card Logos"
+                            class="h-8 w-auto"
+                          />
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1">
+                          Pay with credit or debit card
+                        </p>
+                      </div>
+                    </label>
+
+                    <label class="relative flex-1">
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="venmo"
+                        id="venmoOption"
+                        class="sr-only peer"
+                      />
+                      <div
+                        class="p-4 border border-slate-300 rounded-md cursor-pointer peer-checked:border-sky-500 peer-checked:ring-2 peer-checked:ring-sky-200 hover:border-slate-400"
+                      >
+                        <div class="flex items-center gap-3">
+                          <img
+                            src="images/Venmo_Logo_Blue.svg"
+                            alt="Venmo Logo"
+                            class="h-8 w-auto"
+                          />
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1">
+                          Pay with your Venmo account
+                        </p>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Venmo Form -->
+                <div id="venmoForm" class="hidden">
+                  <div
+                    class="bg-blue-50 border border-blue-200 rounded-md p-4 mb-4"
+                  >
+                    <p class="text-sm text-blue-800 mb-2">
+                      <strong>Pay with Venmo:</strong>
+                    </p>
+                    <p class="text-xs text-blue-600">
+                      After placing your order, you'll receive an email with the
+                      exact amount and payment instructions.
+                    </p>
+                  </div>
+
+                  <div>
+                    <label
+                      for="venmoUsername"
+                      class="block text-sm font-medium text-slate-700 mb-1"
+                    >
+                      Your Venmo Username <span class="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="venmoUsername"
+                      name="venmoUsername"
+                      placeholder="@your-venmo-username"
+                      class="w-full rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2"
+                    />
+                    <p class="text-xs text-slate-600 mt-1">
+                      We'll use this to verify your payment
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Credit Card Payment Info -->
+                <div id="paymentForm" class="space-y-4">
+                  <div class="bg-sky-50 rounded-md p-4 border border-sky-200">
+                    <div class="flex items-start gap-3">
+                      <i class="fas fa-lock text-sky-600 mt-1"></i>
+                      <div">
+                      <div class="flex gap-2">
+                        <i
+                          class="fa-brands fa-cc-stripe text-purple-700 text-lg"
+                        ></i>
+                        <p class="text-sm font-medium text-slate-700">
+                          Secure Payment via Stripe
+                        </p>
+                      </div>
+                      <p class="text-xs font-light">
+                        You'll be redirected to Stripe's secure payment page to
+                        complete your purchase. Your payment information is
+                        never stored on our servers.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Summary - Right Side -->
+            <aside class="lg:w-1/3">
+              <div
+                class="bg-white rounded-xl shadow-sm ring-1 ring-slate-200 p-6 h-fit lg:sticky lg:top-20"
+              >
+                <h4 class="text-lg font-semibold">Final Order Summary</h4>
+                <dl class="mt-4 space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <dt>Mode</dt>
+                    <dd id="finalSumMode" class="font-medium">—</dd>
+                  </div>
+                  <div class="flex justify-between">
+                    <dt>Dog</dt>
+                    <dd id="finalSumDog" class="font-medium">—</dd>
+                  </div>
+                  <div class="flex justify-between">
+                    <dt>Background</dt>
+                    <dd id="finalSumBG" class="font-medium">—</dd>
+                  </div>
+                  <hr class="border-slate-200 my-2" />
+                  <div class="flex justify-between">
+                    <dt>Prints subtotal</dt>
+                    <dd id="finalSumSubtotal">$0</dd>
+                  </div>
+                  <div class="flex justify-between">
+                    <dt>Shipping</dt>
+                    <dd id="finalSumShipping">$15</dd>
+                  </div>
+                  <div class="flex justify-between">
+                    <dt>Tax</dt>
+                    <dd id="finalSumTax">$0</dd>
+                  </div>
+                  <hr class="border-slate-200 my-2" />
+                  <div class="flex justify-between text-base">
+                    <dt class="font-semibold">Total</dt>
+                    <dd id="finalSumTotal" class="font-semibold">$0</dd>
+                  </div>
+                </dl>
+
+                <div class="mt-6">
+                  <button id="placeOrderBtn" class="w-full" disabled>
+                    Place Order
+                  </button>
+                  <p class="mt-2 text-xs text-slate-500">
+                    You'll receive an email confirmation with next steps.
+                  </p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Success Modal -->
+    <div
+      id="successModal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
+    >
+      <div
+        class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all"
+      >
+        <div class="p-8 text-center">
+          <!-- Success Icon -->
+          <div
+            class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4"
+          >
+            <svg
+              class="w-10 h-10 text-green-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              ></path>
+            </svg>
+          </div>
+
+          <!-- Success Message -->
+          <h3 class="text-2xl font-bold text-slate-800 mb-2">
+            Order Placed Successfully!
+          </h3>
+          <p class="text-slate-600 mb-4">Thank you for your order!</p>
+
+          <!-- Order Details -->
+          <div class="bg-slate-50 rounded-md p-4 mb-6 text-left">
+            <p class="text-sm text-slate-700 mb-2">
+              <strong>Order ID:</strong>
+              <span id="modalOrderId" class="font-mono">—</span>
+            </p>
+            <p class="text-sm text-slate-700 mb-2">
+              <strong>Dog:</strong> <span id="modalDogName">—</span>
+            </p>
+            <p class="text-sm text-slate-700">
+              <strong>Total:</strong> <span id="modalTotal">—</span>
+            </p>
+          </div>
+
+          <!-- Email Confirmation Note -->
+          <div class="bg-blue-50 border border-blue-200 rounded-md p-4 mb-6">
+            <p class="text-sm text-blue-800">
+              <i class="fas fa-envelope mr-2"></i>
+              A confirmation email has been sent to
+              <span id="modalEmail" class="font-semibold">your email</span>
+            </p>
+          </div>
+
+          <!-- Venmo Payment Instructions (shown conditionally) -->
+          <div
+            id="venmoInstructions"
+            class="hidden bg-purple-50 border border-purple-200 rounded-md p-4 mb-6"
+          >
+            <p class="text-sm text-purple-800 font-semibold mb-2">
+              <i class="fas fa-credit-card mr-2"></i>Payment Instructions
+            </p>
+            <p class="text-sm text-purple-700">
+              Please send payment to <strong>@yanti-arifin-franz</strong> on
+              Venmo<br />
+              Include order ID
+              <span id="modalVenmoOrderId" class="font-mono font-semibold"
+                >—</span
+              >
+              in the note
+            </p>
+          </div>
+
+          <!-- Next Steps -->
+          <div class="text-left mb-6">
+            <h4 class="font-semibold text-sm text-slate-700 mb-2">
+              What happens next?
+            </h4>
+            <ul class="text-sm text-slate-600 space-y-1">
+              <li>• We'll start creating your portrait within 24 hours</li>
+              <li>
+                • You'll receive a preview for approval in 3-5 business days
+              </li>
+              <li>• Prints ship within 2 days of approval</li>
+            </ul>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex gap-3">
+            <button
+              onclick="closeSuccessModal()"
+              class="flex-1 bg-slate-200 text-slate-800 py-3 px-4 rounded-md hover:bg-slate-300 transition-colors font-medium"
+            >
+              Continue Shopping
+            </button>
+            <button
+              onclick="window.print()"
+              class="flex-1 bg-sky-500 text-white py-3 px-4 rounded-md hover:bg-sky-600 transition-colors font-medium"
+            >
+              <i class="fas fa-print mr-2"></i>Print Receipt
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prices Modal -->
+    <div
+      id="pricesModal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+      onclick="if(event.target === this) document.getElementById('pricesModal').classList.add('hidden')"
+    >
+      <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-md shadow-xl">
+          <!-- Modal header -->
+          <div
+            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200"
+          >
+            <h3 class="text-lg font-semibold text-gray-900">Price List</h3>
+            <a
+              href="#"
+              class="close-button"
+              onclick="document.getElementById('pricesModal').classList.add('hidden'); return false;"
+            >
+              <i class="fa-solid fa-xmark text-sm"></i>
+              <span class="sr-only">Close modal</span>
+            </a>
+          </div>
+
+          <!-- Modal body -->
+          <div class="p-4 md:p-5">
+            <div class="bg-amber-100 border border-amber-200 rounded-md p-3 mb-2">
+              <p class="text-sm text-amber-800">
+                <i class="fa-solid fa-truck mr-2"></i>
+                <strong>FREE SHIPPING</strong> on all orders!
+              </p>
+            </div>
+
+            <!-- Price list -->
+            <!-- PRINTS SECTION -->
+            <div class="bg-slate-200 mb-2 shadow-xl">
+              <div class="bg-slate-200 px-3 py-2 rounded">
+                <h4 class="text-sm font-semibold text-slate-700">Giclée Prints</h4>
+              </div>
+              <img src="/images/mockup-prints2.png" alt="photo of prints">
+              <div class="flex items-center p-2 hover:bg-slate-50 rounded">
+                <div class="flex-1 text-sm">8 × 8</div>
+                <div class="w-24 text-sm text-right text-slate-600">$25</div>
+              </div>
+              <div class="flex items-center p-2 hover:bg-slate-50 rounded">
+                <div class="flex-1 text-sm">10 × 10</div>
+                <div class="w-24 text-sm text-right text-slate-600">$30</div>
+              </div>
+              <div class="flex items-center p-2 hover:bg-slate-50 rounded">
+                <div class="flex-1 text-sm">12 × 12</div>
+                <div class="w-24 text-sm text-right text-slate-600">$40</div>
+              </div>
+              <div class="flex items-center p-2 hover:bg-slate-50 rounded">
+                <div class="flex-1 text-sm">20 × 20</div>
+                <div class="w-24 text-sm text-right text-slate-600">$100</div>
+              </div>
+            </div>
+            <div class="spacer-v"></div>
+
+              <!-- FRAMED SECTION -->
+            <div class="bg-slate-200 mb-2 shadow-xl">
+              <div class="bg-slate-200 px-3 py-2 rounded mt-4">
+                <h4 class="text-sm font-semibold text-slate-700">Framed</h4>
+              </div>
+              <img src="/images/mockup-framed.png" alt="photo of framed prints">
+              <div class="flex items-center p-2 hover:bg-slate-50 rounded">
+                <div class="flex-1 text-sm">8 × 8</div>
+                <div class="w-24 text-sm text-right text-slate-600">$100</div>
+              </div>
+              <div class="flex items-center p-2 hover:bg-slate-50 rounded">
+                <div class="flex-1 text-sm">10 × 10</div>
+                <div class="w-24 text-sm text-right text-slate-600">$120</div>
+              </div>
+            </div>
+            <div class="spacer-v"></div>
+
+            <!-- CANVAS SECTION -->
+
+            <div class="bg-slate-200 mb-2 shadow-xl">
+              <div class="bg-slate-200 px-3 py-2 rounded mt-4">
+                <h4 class="text-sm font-semibold text-slate-700">Canvas</h4>
+              </div>
+              <div id="canvas-mockup" class="flex w-full h-fit gap-2">
+                <div class="canvas-mockup"></div>
+                <div class="canvas-mockup right"></div>
+              </div>
+              <div class="flex items-center p-2 hover:bg-slate-50 rounded">
+                <div class="flex-1 text-sm">16 × 16</div>
+                <div class="w-24 text-sm text-right text-slate-600">$160</div>
+              </div>
+              <div class="flex items-center p-2 hover:bg-slate-50 rounded">
+                <div class="flex-1 text-sm">20 × 20</div>
+                <div class="w-24 text-sm text-right text-slate-600">$200</div>
+              </div>
+            </div>
+            <div class="spacer-v"></div>
+
+            <!-- DIGITAL SECTION -->
+
+            <div class="bg-slate-200 mb-2 shadow-xl">
+              <div class="bg-slate-200 px-3 py-2 rounded mt-4">
+                <h4 class="text-sm font-semibold text-slate-700">Digital</h4>
+              </div>
+
+              <div class="flex items-center p-2 hover:bg-slate-50 rounded">
+                <div class="flex-1 text-sm">Hi-res digital file</div>
+                <div class="w-24 text-sm text-right text-slate-600">$20</div>
+              </div>
+            </div>
+
+            <!-- Footer note -->
+            <div class="bg-sky-50 border border-sky-200 rounded-md p-3 mt-4">
+              <p class="text-xs text-sky-800">
+                <i class="fa-solid fa-info-circle mr-1"></i>
+                All prices are in USD. Custom portraits are created from your photos and delivered within 5-7 business days.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div
+      id="contactModal"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+      onclick="if(event.target === this) document.getElementById('contactModal').classList.add('hidden')"
+    >
+      <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-md shadow-xl">
+          <!-- Modal header -->
+          <div
+            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200"
+          >
+            <h3 class="text-lg font-semibold text-gray-900">Contact Us</h3>
+            <a
+              href="#"
+              class="close-button"
+              onclick="document.getElementById('contactModal').classList.add('hidden'); return false;"
+            >
+              <i class="fa-solid fa-xmark text-sm"></i>
+              <span class="sr-only">Close modal</span>
+            </a>
+          </div>
+
+          <!-- Modal body -->
+          <div class="p-4 md:p-5 space-y-4">
+            <div class="p-4 bg-sky-50 border border-sky-200 rounded-md">
+              <div class="text-sm text-sky-800">
+                <i class="fa-regular fa-message mr-2"></i>
+                <a
+                  href="mailto:contact@pupartportraits.com"
+                  class="text-sky-600 hover:text-sky-800 font-medium"
+                  >contact@pupartportraits.com</a
+                >
+              </div>
+            </div>
+
+            <form id="contactForm">
+              <div class="mb-4">
+                <label
+                  for="contactName"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Name <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="contactName"
+                  name="name"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  placeholder="Your name"
+                />
+              </div>
+
+              <div class="mb-4">
+                <label
+                  for="contactEmail"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Email <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="contactEmail"
+                  name="email"
+                  required
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+
+              <div class="mb-4">
+                <label
+                  for="contactMessage"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Message <span class="text-red-500">*</span>
+                </label>
+                <textarea
+                  id="contactMessage"
+                  name="message"
+                  required
+                  rows="4"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  placeholder="Tell me all about your best fur-end..."
+                ></textarea>
+              </div>
+
+              <!-- Modal footer -->
+              <div class="flex items-center justify-center rounded-sm">
+                <button
+                  type="submit"
+                  class="text-white bg-sky-500 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-md text-sm px-5 py-2.5 text-center"
+                >
+                  <i class="fas fa-paper-plane mr-2"></i>Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Modals -->
+    <div
+      id="infoModal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4"
+    >
+      <div class="bg-white rounded-lg p-8 relative">
+        <a
+          onclick="closeInfoModal()"
+          class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600"
+        >
+          <i class="fas fa-times text-xl"></i>
+        </a>
+
+        <h3
+          id="modalTitle"
+          class="text-lg font-semibold mb-3 text-slate-800"
+        ></h3>
+        <div id="modalContent" class="text-sm text-slate-600 space-y-2"></div>
+      </div>
+    </div>
+
+    <!-- Gallery Modal -->
+
+    <div
+      id="gallery-modal"
+      class="hidden bg-black bg-opacity-50 fixed top-0 right-0 left-0 h-full p-4 z-50 overflow-y-auto"
+      onclick="if(event.target === this) { this.classList.add('hidden'); }"
+    >
+      <!-- Close button positioned fixed to viewport -->
+      <button
+        type="button"
+        class="close-button fixed top-6 right-6 z-50"
+        onclick="document.getElementById('gallery-modal').classList.add('hidden')"
+      >
+        <i class="fa-solid fa-xmark"></i>
+        <span class="sr-only">Close modal</span>
+      </button>
+
+      <div class="relative w-full max-w-7xl mx-auto">
+        <!-- Modal content -->
+        <div
+          class="relative bg-slate-800 rounded-lg shadow-xl max-h-[90vh] flex flex-col"
+        >
+          <!-- Modal header -->
+          <div
+            class="p-4 md:p-6 border-b border-gray-600 bg-slate-800 flex-shrink-0"
+          >
+            <h3 class="text-2xl font-normal text-white">Gallery of Doggies</h3>
+          </div>
+          <!-- Modal body -->
+          <div class="p-4 md:p-6 overflow-y-auto flex-1">
+            <!-- Gallery Grid -->
+            <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              <!-- Portrait items will be dynamically loaded here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 flex items-center justify-center bg-slate-800">
+      <div class="mx-auto max-w-6xl px-4 py-4 text-sm text-slate-400">
+        <p class="mt-2 text-center">
+          ©2025 Yanti Arifin Franz. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="scripts/stripe-config.js"></script>
+    <script src="scripts/portrait-parade.js"></script>
+    <script src="scripts/script.js"></script>
+
+    <!-- Gallery Grid Script -->
+    <script>
+      // Load all portraits into the gallery grid - make it globally accessible
+      window.loadGalleryGrid = async function() {
+        try {
+          const response = await fetch("/portraits/portraits.json");
+          const portraits = await response.json();
+
+          const galleryGrid = document.getElementById("gallery-grid");
+          if (!galleryGrid) return;
+
+          // Clear existing content
+          galleryGrid.innerHTML = "";
+
+          // Create array of all portraits with their names
+          const allPortraits = [];
+
+          for (const [dogName, dogPortraits] of Object.entries(portraits)) {
+            // Get the most recent portrait for each dog
+            const mostRecent = dogPortraits[dogPortraits.length - 1];
+            allPortraits.push({
+              name: dogName.charAt(0).toUpperCase() + dogName.slice(1),
+              url: mostRecent.url,
+              previewUrl: mostRecent.previewUrl,
+              date: mostRecent.date
+            });
+          }
+
+          // Sort alphabetically by name
+          allPortraits.sort((a, b) => a.name.localeCompare(b.name));
+
+          // Create grid items
+          allPortraits.forEach(portrait => {
+            const item = document.createElement("div");
+            item.className = "flex flex-col items-center group";
+
+            item.innerHTML = `
+              <div class="w-full aspect-square rounded-lg overflow-hidden bg-slate-700 shadow-lg relative">
+                <img
+                  src="${portrait.previewUrl}"
+                  alt="${portrait.name}"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <p class="mt-2 text-lg text-white font-light group-hover:text-amber-400 transition-colors">${portrait.name}</p>
+            `;
+
+
+            galleryGrid.appendChild(item);
+          });
+
+        } catch (error) {
+          console.error("Failed to load gallery portraits:", error);
+          const galleryGrid = document.getElementById("gallery-grid");
+          if (galleryGrid) {
+            galleryGrid.innerHTML = '<p class="text-white col-span-full text-center">Failed to load portraits</p>';
+          }
+        }
+      }
+
+
+      // Load gallery when modal is opened
+      document.addEventListener("DOMContentLoaded", function () {
+        // Find all elements that can open the gallery modal
+        const galleryTriggers = document.querySelectorAll('[data-modal-target="gallery-modal"]');
+
+        galleryTriggers.forEach(trigger => {
+          trigger.addEventListener("click", function(e) {
+            e.preventDefault();
+            loadGalleryGrid();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+# Disable ModSecurity (simplified for HostGator)
+<IfModule mod_security.c>
+  SecFilterEngine Off
+</IfModule>
+
+# Set upload limits
+php_value upload_max_filesize 10M
+php_value post_max_size 35M
