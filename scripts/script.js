@@ -555,6 +555,213 @@
       nameInput.addEventListener('input', () => {
         updateValidationState();
         sumDogEl.textContent = nameInput.value.trim() || '—';
+        validateNewPortraitForm();
+      });
+    }
+
+    // Contact preference radio buttons
+    const contactRadios = document.querySelectorAll('input[name="contactPreference"]');
+    const emailField = document.getElementById('emailField');
+    const phoneField = document.getElementById('phoneField');
+    const customerEmail = document.getElementById('customerEmail');
+    const customerPhone = document.getElementById('customerPhone');
+
+    contactRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        if (e.target.value === 'email') {
+          emailField.classList.remove('hidden');
+          phoneField.classList.add('hidden');
+          customerEmail.required = true;
+          customerPhone.required = false;
+          customerPhone.value = '';
+        } else if (e.target.value === 'text') {
+          phoneField.classList.remove('hidden');
+          emailField.classList.add('hidden');
+          customerPhone.required = true;
+          customerEmail.required = false;
+          customerEmail.value = '';
+        }
+        validateNewPortraitForm();
+      });
+    });
+
+    // Email and phone input validation
+    if (customerEmail) {
+      customerEmail.addEventListener('input', validateNewPortraitForm);
+    }
+    if (customerPhone) {
+      customerPhone.addEventListener('input', validateNewPortraitForm);
+    }
+
+    // Validate new portrait form
+    function validateNewPortraitForm() {
+      const submitBtn = document.getElementById('continueToPaymentBtn');
+      if (!submitBtn) return;
+
+      const hasPhotos = uploadedFiles && uploadedFiles.length > 0;
+      const hasDogName = nameInput && nameInput.value.trim();
+      const contactMethod = document.querySelector('input[name="contactPreference"]:checked');
+
+      let hasContactInfo = false;
+      if (contactMethod) {
+        if (contactMethod.value === 'email') {
+          hasContactInfo = customerEmail && customerEmail.value.trim() && customerEmail.validity.valid;
+        } else if (contactMethod.value === 'text') {
+          hasContactInfo = customerPhone && customerPhone.value.trim();
+        }
+      }
+
+      submitBtn.disabled = !(hasPhotos && hasDogName && hasContactInfo);
+    }
+
+    // Continue to payment button (upload photos and show payment page)
+    const continueToPaymentBtn = document.getElementById('continueToPaymentBtn');
+    if (continueToPaymentBtn) {
+      continueToPaymentBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const contactError = document.getElementById('contactError');
+        contactError.classList.add('hidden');
+
+        // Upload photos first
+        continueToPaymentBtn.disabled = true;
+        continueToPaymentBtn.textContent = 'Uploading photos...';
+
+        try {
+          // Upload the cached files
+          if (uploadedFiles.length > 0 && uploadedFileNames.length === 0) {
+            const serverFiles = await uploadFilesToServer(uploadedFiles);
+            if (serverFiles && serverFiles.length > 0) {
+              uploadedFileNames = serverFiles;
+            }
+          }
+
+          // Store form data temporarily for payment page
+          const contactMethod = document.querySelector('input[name="contactPreference"]:checked').value;
+          const contactInfo = contactMethod === 'email' ? customerEmail.value.trim() : customerPhone.value.trim();
+
+          window.newPortraitFormData = {
+            dogName: nameInput.value.trim(),
+            contactMethod: contactMethod,
+            contactInfo: contactInfo,
+            uploadedPhotos: uploadedFileNames
+          };
+
+          // Show payment page
+          document.getElementById('newPath').classList.add('hidden');
+          document.getElementById('newPortraitPayment').classList.remove('hidden');
+          document.getElementById('newPortraitPayment').scrollIntoView({behavior:'smooth', block:'start'});
+
+          // Reset button
+          continueToPaymentBtn.textContent = 'Continue';
+          continueToPaymentBtn.disabled = false;
+
+        } catch (error) {
+          console.error('Upload failed:', error);
+          contactError.textContent = 'Upload failed. Please try again.';
+          contactError.classList.remove('hidden');
+          continueToPaymentBtn.textContent = 'Continue';
+          continueToPaymentBtn.disabled = false;
+        }
+      });
+    }
+
+    // Back to form button
+    const backToFormBtn = document.getElementById('backToFormBtn');
+    if (backToFormBtn) {
+      backToFormBtn.addEventListener('click', () => {
+        document.getElementById('newPortraitPayment').classList.add('hidden');
+        document.getElementById('newPath').classList.remove('hidden');
+        document.getElementById('newPath').scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    }
+
+    // Payment method toggle for deposit
+    const depositPaymentRadios = document.querySelectorAll('input[name="depositPaymentMethod"]');
+    const venmoDepositInstructions = document.getElementById('venmoDepositInstructions');
+    const submitDepositPaymentBtn = document.getElementById('submitDepositPaymentBtn');
+
+    depositPaymentRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        if (e.target.value === 'venmo') {
+          venmoDepositInstructions.classList.remove('hidden');
+          submitDepositPaymentBtn.textContent = "I've Sent Payment";
+        } else {
+          venmoDepositInstructions.classList.add('hidden');
+          submitDepositPaymentBtn.textContent = 'Pay with Card';
+        }
+      });
+    });
+
+    // Submit deposit payment
+    if (submitDepositPaymentBtn) {
+      submitDepositPaymentBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const paymentMethod = document.querySelector('input[name="depositPaymentMethod"]:checked').value;
+
+        submitDepositPaymentBtn.disabled = true;
+        submitDepositPaymentBtn.textContent = 'Processing...';
+
+        try {
+          // Prepare order data with digital portrait
+          const formData = window.newPortraitFormData;
+          const orderData = {
+            mode: 'new',
+            dogName: formData.dogName,
+            background: 'Artist Choice',
+            uploadedPhotos: formData.uploadedPhotos,
+            contactMethod: formData.contactMethod,
+            contactInfo: formData.contactInfo,
+            prints: [{ size: 'Digital Portrait', quantity: 1, price: 25 }],
+            shipping: {
+              email: formData.contactMethod === 'email' ? formData.contactInfo : 'noemail@provided.com',
+              phone: formData.contactMethod === 'text' ? formData.contactInfo : ''
+            },
+            payment: { method: paymentMethod },
+            totals: { subtotal: 25, tax: 0, shipping: 0, total: 25 }
+          };
+
+          if (paymentMethod === 'card') {
+            // Stripe payment
+            const items = [{ size: 'Digital Portrait (High-Res)', quantity: 1, price: 25 }];
+            const response = await fetch('/api/create-checkout-session.php', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                items: items,
+                email: formData.contactMethod === 'email' ? formData.contactInfo : '',
+                dogName: formData.dogName
+              })
+            });
+
+            const session = await response.json();
+            if (session.id) {
+              // Save order data to localStorage for after payment
+              localStorage.setItem('pendingDepositOrder', JSON.stringify(orderData));
+              // Redirect to Stripe Checkout
+              return stripe.redirectToCheckout({ sessionId: session.id });
+            } else {
+              throw new Error('Failed to create payment session');
+            }
+          } else {
+            // Venmo payment - submit order immediately
+            const response = await submitOrder(orderData);
+            if (response && response.success) {
+              showNewPortraitThankYou(orderData);
+            } else {
+              throw new Error('Order submission failed');
+            }
+          }
+
+        } catch (error) {
+          console.error('Payment failed:', error);
+          alert('Payment failed. Please try again.');
+          submitDepositPaymentBtn.textContent = paymentMethod === 'venmo' ? "I've Sent Payment" : 'Pay with Card';
+          submitDepositPaymentBtn.disabled = false;
+        }
       });
     }
     
@@ -702,6 +909,7 @@
                 if (dogNameSection) dogNameSection.classList.add('hidden');
               }
               updateValidationState();
+              validateNewPortraitForm();
             };
 
             wrapper.appendChild(img);
@@ -716,6 +924,7 @@
           }
 
           updateValidationState();
+          validateNewPortraitForm();
         }
 
         if (uploadedFiles.length === 3) {
@@ -1434,6 +1643,20 @@
     }
   });
 
+  // Change background checkbox toggle for existing portraits
+  const changeBackgroundCheck = document.getElementById('changeBackgroundCheck');
+  const existingBackgroundPanel = document.getElementById('existingBackgroundPanel');
+
+  if (changeBackgroundCheck && existingBackgroundPanel) {
+    changeBackgroundCheck.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        existingBackgroundPanel.classList.remove('hidden');
+      } else {
+        existingBackgroundPanel.classList.add('hidden');
+      }
+    });
+  }
+
   // Existing portrait handlers
   if (findBtn) findBtn.onclick = async ()=>{
     errEl?.classList.add('hidden');
@@ -1546,6 +1769,24 @@
       placeOrderBtn.disabled = false;
       placeOrderBtn.textContent = 'Place Order';
     }
+  };
+
+  // New Portrait Thank You Page
+  window.showNewPortraitThankYou = function(orderData) {
+    // Hide the form section
+    document.getElementById('newPath').classList.add('hidden');
+
+    // Show thank you section
+    const thankYouSection = document.getElementById('newPortraitThankYou');
+    thankYouSection.classList.remove('hidden');
+
+    // Populate thank you page with order details
+    document.getElementById('thankYouDogName').textContent = orderData.dogName || 'your pup';
+    document.getElementById('thankYouContactMethod').textContent = orderData.contactMethod === 'email' ? 'email' : 'text message';
+    document.getElementById('thankYouContactInfo').textContent = orderData.contactInfo;
+
+    // Scroll to top
+    thankYouSection.scrollIntoView({behavior:'smooth', block:'start'});
   };
 
   window.closeSuccessModal = function() {

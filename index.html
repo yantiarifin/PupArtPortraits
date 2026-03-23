@@ -152,31 +152,34 @@
             <a
               href="#"
               onclick="event.preventDefault(); document.getElementById('gallery-modal').classList.remove('hidden'); loadGalleryGrid();"
-              class="text-white text-sm font-normal hover:text-amber-400 transition-colors">
+              class="text-white text-sm font-normal hover:text-amber-400 transition-colors"
+            >
               <i class="fa-regular fa-images mr-3 w20"></i>Gallery
             </a>
             <a
               href="#"
               data-modal-target="pricesModal"
               data-modal-toggle="pricesModal"
-              class="text-white text-sm font-normal hover:text-amber-400 transition-colors">
+              class="text-white text-sm font-normal hover:text-amber-400 transition-colors"
+            >
               <i class="fa-regular fa-credit-card mr-3 w20"></i>Prices
             </a>
             <a
               href="#"
               data-modal-target=""
               data-modal-toggle=""
-              class="text-white text-sm font-normal hover:text-amber-400 transition-colors">
+              class="text-white text-sm font-normal hover:text-amber-400 transition-colors"
+            >
               <i class="fa-regular fa-file-lines mr-3 w20"></i>About
             </a>
             <a
               href="#"
               data-modal-target="contactModal"
               data-modal-toggle="contactModal"
-              class="text-white text-sm font-normal hover:text-amber-400 transition-colors">
+              class="text-white text-sm font-normal hover:text-amber-400 transition-colors"
+            >
               <i class="fa-solid fa-envelope mr-3 w20"></i>Contact
             </a>
-
           </nav>
         </div>
       </div>
@@ -186,19 +189,19 @@
       <!-- START -->
       <section
         id="start"
-        class="bg-velvet flex h-screen flex-col gap-12 items-center"
+        class="bg-slate-800 flex h-screen flex-col gap-12 items-center"
       >
         <div id="paradeStart" class="grid grid-cols-3 md:grid-cols-6">
           <!-- Portrait images will be loaded dynamically by portrait-parade.js -->
         </div>
 
-        <fieldset class="flex flex-col flex-wrap gap-2 sm:gap-6 shadow">
+        <fieldset class="flex flex-col flex-wrap gap-4 sm:gap-6 shadow">
           <a
             href="#newPath"
             id="newPortraitBtn"
             class="hasExisting-btn px-6 py-3 rounded-md transition-colors text-md md:text-[1.2rem] inline-block text-center shadow-2xl"
           >
-            Make a New Portrait
+            Create a New Portrait
           </a>
           <a
             href="#existingPanel"
@@ -213,7 +216,7 @@
       <!-- New portrait form -->
       <section
         id="newPath"
-        class="bg-sunshine flex min-h-screen flex-col items-center hidden"
+        class="bg-slate-800 flex min-h-screen flex-col items-center hidden"
       >
         <div id="paradeNew" class="hidden md:grid grid-cols-3 md:grid-cols-6">
           <!-- Portrait images will be loaded dynamically by portrait-parade.js -->
@@ -225,24 +228,26 @@
           novalidate
         >
           <h4
-            class="text-[1.5rem] md:text-[2rem] text-slate-700 font-medium text-center tracking-tight shadow-sm p-2"
+            class="text-[1.5rem] md:text-[2rem] text-white font-medium text-center tracking-tight p-2"
           >
             New Portrait Details
           </h4>
-          <div class="w-fit text-center m-4">
-            <label class="text-lg font-medium"
+          <div class="w-fit text-center m-4 text-white">
+            <label class="text-lg font-light"
               >Upload up to 3 Photos <span class="text-rose-500">*</span></label
             >
-            <p class="mt-1 text-sm text-slate-800 leading-tight">
+            <p class="mt-1 text-sm font-normal text-white leading-tight">
               Make sure photos are clear, in focus and well-lit where the face
               is visible. JPG/PNG up to 10MB each.
             </p>
             <div class="my-4 flex flex-col items-center gap-4">
               <label
                 for="photos"
-                class="bg-white cursor-pointer rounded-sm border border-dashed border-slate-300 p-4 hover:bg-slate-300 inline-block relative"
+                class="cursor-pointer rounded-sm border border-dashed border-slate-300 p-4 inline-block relative bg-none active:bg-black"
               >
-                <span class="text-sm font-medium">Select Photos</span>
+                <span class="text-sm font-medium text-white"
+                  >Select Photos</span
+                >
                 <input
                   type="file"
                   id="photos"
@@ -264,12 +269,12 @@
 
               <!-- Dog name field - hidden until photos uploaded -->
               <div id="dogNameSection" class="mt-2 hidden">
-                <label for="dogNameNew" class="block text-lg font-medium">
-                  Dog name <span class="text-rose-500">*</span>
+                <label for="dogNameNew" class="block text-lg font-light mb-2">
+                  What's your doggie's name? <span class="text-rose-500">*</span>
                 </label>
                 <input
                   id="dogNameNew"
-                  class="mt-2 rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2"
+                  class="mt-2 text-slate-700 rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2 w-full max-w-md"
                   placeholder="Enter your dog's name"
                   required
                 />
@@ -279,6 +284,86 @@
                 >
                   Please enter your dog's name.
                 </p>
+
+                <!-- Contact Preference -->
+                <div class="mt-6">
+                  <label class="block text-lg font-light mb-3">
+                    How should I contact you?
+                    <span class="text-rose-500">*</span>
+                  </label>
+                  <div class="flex gap-4 mb-4">
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="contactPreference"
+                        value="email"
+                        class="mr-2 w-4 h-4"
+                        required
+                      />
+                      <span class="text-base">Email</span>
+                    </label>
+                    <label class="flex items-center cursor-pointer">
+                      <input
+                        type="radio"
+                        name="contactPreference"
+                        value="text"
+                        class="mr-2 w-4 h-4"
+                        required
+                      />
+                      <span class="text-base">Text</span>
+                    </label>
+                  </div>
+
+                  <!-- Email field (shown when email is selected) -->
+                  <div id="emailField" class="hidden">
+                    <label
+                      for="customerEmail"
+                      class="block text-base text-slate-700 font-medium mb-2"
+                    >
+                      Email address <span class="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="customerEmail"
+                      class="rounded-md border border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2 w-full max-w-md"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+
+                  <!-- Phone field (shown when text is selected) -->
+                  <div id="phoneField" class="hidden">
+                    <label
+                      for="customerPhone"
+                      class="block text-base font-medium text-slate-700 mb-2"
+                    >
+                      Phone number <span class="text-rose-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      id="customerPhone"
+                      class="rounded-md border text-slate-700  border-slate-300 focus:border-sky-500 focus:ring-sky-500 px-3 py-2 w-full max-w-md"
+                      placeholder="(555) 555-5555"
+                    />
+                  </div>
+
+                  <p
+                    id="contactError"
+                    class="mt-2 text-sm bg-red-600 text-white p-3 rounded-md hidden"
+                  >
+                    Please select a contact method and provide your contact
+                    information.
+                  </p>
+                </div>
+
+                <!-- Continue to Payment Button -->
+                <button
+                  type="button"
+                  id="continueToPaymentBtn"
+                  class="mt-6 bg-sky-600 hover:bg-sky-700 text-white px-6 py-3 rounded-md font-medium transition-colors"
+                  disabled
+                >
+                  Continue
+                </button>
               </div>
             </div>
             <p
@@ -286,142 +371,6 @@
               class="mt-2 text-sm bg-red-600 text-white p-3 rounded-md hidden"
             >
               Please upload at least one valid photo.
-            </p>
-          </div>
-
-          <!-- BACKGROUND SELECTION REMOVED FOR NEW PORTRAITS -->
-          <div class="w-fit text-center mb-4 hidden">
-            <label class="text-xl font-medium"
-              >Select a background <span class="text-rose-500">*</span></label
-            >
-          </div>
-          <div
-            id="bgSection"
-            class="bg-white mb-10 rounded-md shadow-lg w-full max-w-4xl p-2 md:p-1 hidden"
-          >
-            <div
-              id="bgChoices"
-              role="listbox"
-              aria-label="Background choices"
-              class="grid grid-cols-3 md:grid-cols-6 gap-2 p-1 md:p-2"
-            >
-              <!-- simple color chips -->
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Coral"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-coral-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Coral
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Crimson"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-crimson-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Crimson
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Sunshine"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-sunshine-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Sunshine
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Lemon"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-lemon-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Lemon
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Meadow"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-meadow-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Meadow
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Turquoise"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-turquoise-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Turquoise
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Emerald"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-emerald-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Emerald
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Ocean"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-ocean-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Ocean
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Sky"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-sky-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Sky
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Twilight"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-twilight-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Twilight
-              </button>
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Velvet"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-velvet-preview.png)] text-white text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Velvet
-              </button>
-
-
-              <button
-                type="button"
-                role="option"
-                aria-checked="false"
-                data-value="Surprise"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-noselect-preview.png)] text-slate-600 text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
-              >
-                Surprise Me
-              </button>
-            </div>
-            <p
-              id="bgError"
-              class="mt-1 text-sm bg-red-600 text-white p-3 rounded-md hidden"
-            >
-              Please select a background color.
             </p>
           </div>
 
@@ -439,8 +388,8 @@
             ></ul>
           </div>
 
-          <!-- Continue Button -->
-          <div class="p-4 mb-10">
+          <!-- Continue Button - HIDDEN (replaced with submit button in form) -->
+          <div class="p-4 mb-10 hidden">
             <button
               id="continueToOrderBtn"
               type="hasExisting-btn"
@@ -453,6 +402,236 @@
             </p>
           </div>
         </form>
+      </section>
+
+      <!-- NEW PORTRAIT PAYMENT -->
+      <section
+        id="newPortraitPayment"
+        class="bg-amber-50 min-h-screen flex flex-col items-center hidden"
+      >
+        <div class="max-w-2xl mx-auto p-4">
+          <div class="bg-white rounded-lg shadow-xl p-4">
+            <h3 class="text-3xl font-bold text-slate-800 mb-4 text-center">
+              What You'll Get
+            </h3>
+
+            <div class="bg-sky-50 border-2 border-sky-200 rounded-lg p-6 mb-6">
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-lg font-semibold text-slate-700"
+                  >3000 x 3000 Image File</span
+                >
+                <span class="text-2xl font-bold text-sky-600">$25.00</span>
+              </div>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                You'll receive a high-resolution digital file of your custom
+                portrait. Included will be 1-2 rounds of revisions, depending on
+                the request.
+              </p>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-slate-800 mb-4">
+                Select Payment Method
+              </h3>
+
+              <!-- Payment method selection -->
+              <div class="space-y-3 mb-6">
+                <label
+                  class="flex items-center p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-sky-400 transition-colors"
+                >
+                  <input
+                    type="radio"
+                    name="depositPaymentMethod"
+                    value="card"
+                    class="mr-3 w-5 h-5"
+                    checked
+                  />
+                  <div class="flex-1">
+                    <div class="font-medium text-slate-800">Credit Card</div>
+                    <div class="text-sm text-slate-500">
+                      Secure payment via Stripe
+                    </div>
+                  </div>
+                  <i class="fa-brands fa-cc-stripe text-3xl text-sky-600"></i>
+                </label>
+
+                <label
+                  class="flex items-center p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-sky-400 transition-colors"
+                >
+                  <input
+                    type="radio"
+                    name="depositPaymentMethod"
+                    value="venmo"
+                    class="mr-3 w-5 h-5"
+                  />
+                  <div class="flex-1">
+                    <div class="font-medium text-slate-800">Venmo</div>
+                    <div class="text-sm text-slate-500">Pay with Venmo app</div>
+                  </div>
+                  <svg class="w-16 h-8" viewBox="0 0 100 28" fill="none">
+                    <path
+                      d="M23.763 0.573c1.116 1.978 1.488 3.956 1.488 6.492 0 8.097-6.88 18.598-12.463 25.09H1.116L0 1.434h11.16l0.372 17.482c2.232-3.769 5.02-9.517 5.02-13.66 0-2.164-0.372-3.769-0.93-5.12L23.763 0.573z"
+                      fill="#3D95CE"
+                    />
+                  </svg>
+                </label>
+              </div>
+
+              <!-- Venmo Instructions (shown when Venmo selected) -->
+              <div
+                id="venmoDepositInstructions"
+                class="hidden bg-amber-50 border-2 border-amber-300 rounded-lg p-4 mb-4"
+              >
+                <h4 class="font-semibold text-amber-900 mb-2">
+                  Venmo Payment Instructions:
+                </h4>
+                <p class="text-sm">Please send $25 to <span class="font-semibold">@yanti-arifin-franz</span>. Add your doggie's name in the note.</p>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="flex gap-3">
+                <button
+                  type="button"
+                  id="backToFormBtn"
+                  class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 px-6 py-3 rounded-md font-medium transition-colors"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  id="submitDepositPaymentBtn"
+                  class="flex-1 bg-sky-600 hover:bg-sky-700 text-white px-6 py-3 rounded-md font-medium transition-colors"
+                >
+                  Pay with Card
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEW PORTRAIT THANK YOU -->
+      <section
+        id="newPortraitThankYou"
+        class="bg-lime-100 min-h-screen flex flex-col items-center justify-center hidden"
+      >
+        <div class="max-w-2xl mx-auto p-8 text-center">
+          <div class="bg-white rounded-lg shadow-xl p-8">
+            <div class="mb-6">
+              <svg
+                class="w-20 h-20 mx-auto text-green-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800 mb-4">Thank You!</h2>
+            <p class="text-lg text-slate-600 mb-6">
+              I've received your photos for
+              <span
+                id="thankYouDogName"
+                class="font-semibold text-slate-800"
+              ></span
+              >'s portrait!
+            </p>
+            <div class="bg-slate-50 rounded-md p-6 mb-6 text-left">
+              <h3 class="font-semibold text-slate-800 mb-3">
+                What happens next?
+              </h3>
+              <ul class="space-y-2 text-slate-600">
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 mr-2 mt-0.5 text-sky-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span
+                    >I'll review your photos and reach out if I have any
+                    questions</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 mr-2 mt-0.5 text-sky-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span
+                    >I'll create your custom portrait with care and attention to
+                    detail</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="w-5 h-5 mr-2 mt-0.5 text-sky-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span
+                    >You'll receive your portrait within the next 1-2
+                    weeks</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div
+              class="bg-green-50 border-2 border-green-200 rounded-lg p-4 mb-6"
+            >
+              <p class="text-sm text-green-800 font-semibold mb-2">
+                <i class="fas fa-check-circle mr-2"></i>Payment Received: $25.00
+              </p>
+              <p class="text-sm text-slate-600">
+                You'll receive your high-resolution digital portrait file within
+                1-2 weeks. Physical prints available for additional purchase.
+              </p>
+            </div>
+            <p class="text-slate-600 mb-6">
+              I'll contact you via
+              <span id="thankYouContactMethod" class="font-semibold"></span> at
+              <span
+                id="thankYouContactInfo"
+                class="font-semibold text-slate-800"
+              ></span>
+            </p>
+            <button
+              onclick="window.location.reload()"
+              class="bg-sky-600 hover:bg-sky-700 text-white px-6 py-3 rounded-md font-medium transition-colors"
+            >
+              Back to Home
+            </button>
+          </div>
+        </div>
       </section>
 
       <!-- EXISTING -->
@@ -553,7 +732,7 @@
       <!-- EXISTING PORTRAIT BACKGROUND SELECTION -->
       <section
         id="existingBackgroundPanel"
-        class="bg-sunshine min-h-screen flex flex-col items-center hidden"
+        class="bg-white min-h-screen flex flex-col items-center hidden"
       >
         <div
           id="paradeExistingBg"
@@ -573,7 +752,7 @@
 
           <!-- Preview Canvas Area -->
           <div id="bgPreviewArea" class="mb-6 hidden">
-            <div class="bg-white p-4 rounded-lg shadow-lg">
+            <div class="bg-white p-0 rounded-lg shadow-lg">
               <canvas
                 id="bgPreviewCanvas"
                 width="200"
@@ -700,7 +879,7 @@
                   role="option"
                   aria-checked="false"
                   data-value="Linen"
-                class="w-full aspect-square rounded-md bg-[url(/images/bg-linen-preview.png)] text-slate-600 text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
+                  class="w-full aspect-square rounded-md bg-[url(/images/bg-linen-preview.png)] text-slate-600 text-sm flex flex-col justify-end items-center pb-1 hover:shadow-[inset_0_0_0_100px_rgba(0,0,0,0.2)]"
                 >
                   Linen
                 </button>
@@ -724,7 +903,6 @@
                 >
                   Charcoal
                 </button>
-
 
                 <button
                   type="button"
@@ -776,6 +954,7 @@
 
           <div class="flex flex-col lg:flex-row gap-6">
             <!-- Select Prints - Left Side on desktop -->
+
             <div class="w-full">
               <div
                 id="print-selection-form"
@@ -785,28 +964,36 @@
                   <div class="w-full flex flex-col sm:flex-row gap-6">
                     <!-- Selections on right -->
                     <div class="flex-1">
-                      <!-- Header row -->
-                      <div
-                        class="flex w-full items-center p-3 border-b border-slate-200 mb-2"
-                      >
-                        <div
-                          class="flex-1 text-base font-medium text-slate-600"
-                        >
-                          Size
-                        </div>
-                        <div
-                          class="narrow-col text-base font-medium text-slate-600 text-center sm:text-left"
-                        >
-                          Price
-                        </div>
-                        <div
-                          class="narrow-col end text-base font-medium text-slate-600"
-                        >
-                          Quantity
-                        </div>
-                      </div>
-
                       <form id="printForm">
+                        <!-- Digital Only -->
+                        <div class="bg-slate-200 px-3 py-2 mb-2 mt-4 rounded">
+                          <h4 class="text-sm font-semibold text-slate-700">
+                            Digital
+                          </h4>
+                        </div>
+                        <div
+                          class="flex w-full items-center p-3 hover:bg-slate-50 border-b border-slate-300"
+                        >
+                          <div class="flex-1">
+                            <label class="flex items-center gap-2">
+                              <input
+                                type="checkbox"
+                                id="digitalOnly"
+                                data-price="20"
+                              />
+                              High-res digital file
+                            </label>
+                          </div>
+                          <div class="narrow-col">
+                            <span class="text-slate-500">$25</span>
+                          </div>
+                          <div class="narrow-col">
+                            <div class="flex items-center gap-2 opacity-0 h-8">
+                              <!-- Quantity hidden for digital file -->
+                            </div>
+                          </div>
+                        </div>
+
                         <!-- PRINTS SECTION -->
                         <div
                           class="bg-slate-200 hover:bg-slate-300 transition-colors duration-200 px-3 py-2 mb-2 rounded flex items-center justify-between gap-2 cursor-pointer"
@@ -821,7 +1008,7 @@
 
                         <!-- 8 x 8 Print -->
                         <div
-                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                          class="flex w-full items-center p-3 hover:bg-slate-50 border-b border-slate-300"
                         >
                           <div class="flex-1">
                             <label
@@ -864,7 +1051,7 @@
 
                         <!-- 10 x 10 Print -->
                         <div
-                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                          class="flex w-full items-center p-3 hover:bg-slate-50 border-b border-slate-300"
                         >
                           <div class="flex-1">
                             <label
@@ -907,7 +1094,7 @@
 
                         <!-- 12 x 12 Print -->
                         <div
-                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                          class="flex w-full items-center p-3 hover:bg-slate-50 border-b border-slate-300"
                         >
                           <div class="flex-1">
                             <label
@@ -950,7 +1137,7 @@
 
                         <!-- 20 x 20 Print -->
                         <div
-                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                          class="flex w-full items-center p-3 hover:bg-slate-50 border-b border-slate-300"
                         >
                           <div class="flex-1">
                             <label
@@ -994,7 +1181,7 @@
                         <!-- Test Option (hidden by default, shown only in test mode) -->
                         <div
                           id="testOption"
-                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300 hidden"
+                          class="flex w-full items-center p-3 hover:bg-slate-50 border-b border-slate-300 hidden"
                         >
                           <div class="flex-1">
                             <label
@@ -1036,6 +1223,7 @@
                         </div>
 
                         <!-- FRAMED SECTION -->
+
                         <div
                           class="bg-slate-200 hover:bg-slate-300 transition-colors duration-200 px-3 py-2 mb-2 mt-4 rounded flex items-center justify-between gap-2 cursor-pointer"
                           onclick="showInfoModal('framed')"
@@ -1049,7 +1237,7 @@
 
                         <!-- 8 x 8 Framed -->
                         <div
-                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                          class="flex w-full items-center p-3 hover:bg-slate-50 border-b border-slate-300"
                         >
                           <div class="flex-1">
                             <label
@@ -1092,7 +1280,7 @@
 
                         <!-- 10 x 10 Framed -->
                         <div
-                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                          class="flex w-full items-center p-3 hover:bg-slate-50 border-b border-slate-300"
                         >
                           <div class="flex-1">
                             <label
@@ -1147,7 +1335,7 @@
 
                         <!-- 16 x 16 Canvas -->
                         <div
-                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                          class="flex w-full items-center p-3 hover:bg-slate-50 border-b border-slate-300"
                         >
                           <div class="flex-1">
                             <label
@@ -1190,7 +1378,7 @@
 
                         <!-- 20 x 20 Canvas -->
                         <div
-                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
+                          class="flex w-full items-center p-3 hover:bg-slate-50 border-b border-slate-300"
                         >
                           <div class="flex-1">
                             <label
@@ -1227,36 +1415,6 @@
                                 class="w-12 sm:w-16 rounded-md border border-slate-300 qtyInput px-1 sm:px-2 py-1 text-center sm:text-left h-8"
                                 disabled
                               />
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- Digital Only -->
-                        <div class="bg-slate-200 px-3 py-2 mb-2 mt-4 rounded">
-                          <h4 class="text-sm font-semibold text-slate-700">
-                            Digital
-                          </h4>
-                        </div>
-
-                        <div
-                          class="flex w-full items-center p-3 rounded-md hover:bg-slate-50 border-b border-slate-300"
-                        >
-                          <div class="flex-1">
-                            <label class="flex items-center gap-2">
-                              <input
-                                type="checkbox"
-                                id="digitalOnly"
-                                data-price="20"
-                              />
-                              Hi-res digital file
-                            </label>
-                          </div>
-                          <div class="narrow-col">
-                            <span class="text-slate-500">$20</span>
-                          </div>
-                          <div class="narrow-col">
-                            <div class="flex items-center gap-2 opacity-0 h-8">
-                              <!-- Quantity hidden for digital file -->
                             </div>
                           </div>
                         </div>
@@ -1829,7 +1987,9 @@
 
           <!-- Modal body -->
           <div class="p-4 md:p-5">
-            <div class="bg-amber-100 border border-amber-200 rounded-md p-3 mb-2">
+            <div
+              class="bg-amber-100 border border-amber-200 rounded-md p-3 mb-2"
+            >
               <p class="text-sm text-amber-800">
                 <i class="fa-solid fa-truck mr-2"></i>
                 <strong>FREE SHIPPING</strong> on all orders!
@@ -1840,9 +2000,11 @@
             <!-- PRINTS SECTION -->
             <div class="bg-slate-200 mb-2 shadow-xl">
               <div class="bg-slate-200 px-3 py-2 rounded">
-                <h4 class="text-sm font-semibold text-slate-700">Giclée Prints</h4>
+                <h4 class="text-sm font-semibold text-slate-700">
+                  Giclée Prints
+                </h4>
               </div>
-              <img src="/images/mockup-prints2.png" alt="photo of prints">
+              <img src="/images/mockup-prints2.png" alt="photo of prints" />
               <div class="flex items-center p-2 hover:bg-slate-50 rounded">
                 <div class="flex-1 text-sm">8 × 8</div>
                 <div class="w-24 text-sm text-right text-slate-600">$25</div>
@@ -1862,12 +2024,15 @@
             </div>
             <div class="spacer-v"></div>
 
-              <!-- FRAMED SECTION -->
+            <!-- FRAMED SECTION -->
             <div class="bg-slate-200 mb-2 shadow-xl">
               <div class="bg-slate-200 px-3 py-2 rounded mt-4">
                 <h4 class="text-sm font-semibold text-slate-700">Framed</h4>
               </div>
-              <img src="/images/mockup-framed.png" alt="photo of framed prints">
+              <img
+                src="/images/mockup-framed.png"
+                alt="photo of framed prints"
+              />
               <div class="flex items-center p-2 hover:bg-slate-50 rounded">
                 <div class="flex-1 text-sm">8 × 8</div>
                 <div class="w-24 text-sm text-right text-slate-600">$100</div>
@@ -1917,7 +2082,8 @@
             <div class="bg-sky-50 border border-sky-200 rounded-md p-3 mt-4">
               <p class="text-xs text-sky-800">
                 <i class="fa-solid fa-info-circle mr-1"></i>
-                All prices are in USD. Custom portraits are created from your photos and delivered within 5-7 business days.
+                All prices are in USD. Custom portraits are created from your
+                photos and delivered within 5-7 business days.
               </p>
             </div>
           </div>
@@ -2083,7 +2249,10 @@
           <!-- Modal body -->
           <div class="p-4 md:p-6 overflow-y-auto flex-1">
             <!-- Gallery Grid -->
-            <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <div
+              id="gallery-grid"
+              class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
+            >
               <!-- Portrait items will be dynamically loaded here -->
             </div>
           </div>
@@ -2107,7 +2276,7 @@
     <!-- Gallery Grid Script -->
     <script>
       // Load all portraits into the gallery grid - make it globally accessible
-      window.loadGalleryGrid = async function() {
+      window.loadGalleryGrid = async function () {
         try {
           const response = await fetch("/portraits/portraits.json");
           const portraits = await response.json();
@@ -2122,13 +2291,15 @@
           const allPortraits = [];
 
           for (const [dogName, dogPortraits] of Object.entries(portraits)) {
-            // Get the most recent portrait for each dog
-            const mostRecent = dogPortraits[dogPortraits.length - 1];
-            allPortraits.push({
-              name: dogName.charAt(0).toUpperCase() + dogName.slice(1),
-              url: mostRecent.url,
-              previewUrl: mostRecent.previewUrl,
-              date: mostRecent.date
+            // Add ALL portraits for each dog (not just most recent)
+            dogPortraits.forEach((portrait) => {
+              allPortraits.push({
+                name: dogName.charAt(0).toUpperCase() + dogName.slice(1),
+                url: portrait.url,
+                previewUrl: portrait.previewUrl,
+                date: portrait.date,
+                file: portrait.file, // Include filename to differentiate duplicates
+              });
             });
           }
 
@@ -2136,7 +2307,7 @@
           allPortraits.sort((a, b) => a.name.localeCompare(b.name));
 
           // Create grid items
-          allPortraits.forEach(portrait => {
+          allPortraits.forEach((portrait) => {
             const item = document.createElement("div");
             item.className = "flex flex-col items-center group";
 
@@ -2152,27 +2323,27 @@
               <p class="mt-2 text-lg text-white font-light group-hover:text-amber-400 transition-colors">${portrait.name}</p>
             `;
 
-
             galleryGrid.appendChild(item);
           });
-
         } catch (error) {
           console.error("Failed to load gallery portraits:", error);
           const galleryGrid = document.getElementById("gallery-grid");
           if (galleryGrid) {
-            galleryGrid.innerHTML = '<p class="text-white col-span-full text-center">Failed to load portraits</p>';
+            galleryGrid.innerHTML =
+              '<p class="text-white col-span-full text-center">Failed to load portraits</p>';
           }
         }
-      }
-
+      };
 
       // Load gallery when modal is opened
       document.addEventListener("DOMContentLoaded", function () {
         // Find all elements that can open the gallery modal
-        const galleryTriggers = document.querySelectorAll('[data-modal-target="gallery-modal"]');
+        const galleryTriggers = document.querySelectorAll(
+          '[data-modal-target="gallery-modal"]'
+        );
 
-        galleryTriggers.forEach(trigger => {
-          trigger.addEventListener("click", function(e) {
+        galleryTriggers.forEach((trigger) => {
+          trigger.addEventListener("click", function (e) {
             e.preventDefault();
             loadGalleryGrid();
           });

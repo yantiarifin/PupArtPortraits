@@ -63,6 +63,7 @@
       'Tessa-2025-09-03-thumb.jpg',
       'Toby-2025-05-11-thumb.jpg',
       'Tony-2025-09-11-thumb.jpg',
+      'Willis-2025-10-28-thumb.jpg',
       'Winston-2025-06-17-thumb.jpg',
       'Winston-2025-08-22-thumb.jpg',
       'Zappy-2025-06-23-thumb.jpg'

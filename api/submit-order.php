@@ -96,9 +96,13 @@ $orderData = [
 // Save order to JSON file
 $orderFile = $ordersDir . $orderId . '.json';
 if (file_put_contents($orderFile, json_encode($orderData, JSON_PRETTY_PRINT))) {
-    
-    // Send branded HTML email notification
+
+    // Check if this is a new portrait consultation (no payment, no shipping details)
+    $isConsultation = ($orderData['payment']['method'] === 'none' && $orderData['totals']['total'] == 0);
+
+    // Send branded HTML email notification (only if email is provided and not a consultation)
     $to = $orderData['shipping']['email'];
+    $sendEmail = !empty($to) && $to !== 'noemail@provided.com' && !$isConsultation;
     $subject = "🎨 Order Confirmation - PupArt Portraits #{$orderId}";
 
     // HTML message with branding
@@ -234,24 +238,45 @@ if (file_put_contents($orderFile, json_encode($orderData, JSON_PRETTY_PRINT))) {
     $message .= $htmlMessage . "\r\n";
     $message .= "--{$boundary}--";
 
-    // Send email
-    @mail($to, $subject, $message, $headers);
+    // Send email (only if valid email and not consultation)
+    if ($sendEmail) {
+        @mail($to, $subject, $message, $headers);
+    }
 
     // Also send notification to admin email
     $adminEmail = ADMIN_EMAIL;
-    $adminSubject = "New Order Received - {$orderId}";
-    $adminMessage = "New order received!\n\n";
-    $adminMessage .= "Customer: {$shipping['firstName']} {$shipping['lastName']}\n";
+    $adminSubject = $isConsultation ? "New Portrait Consultation - {$orderId}" : "New Order Received - {$orderId}";
+    $adminMessage = $isConsultation ? "New portrait consultation received!\n\n" : "New order received!\n\n";
+
+    // Get customer name from shipping if available
+    $customerName = '';
+    if (!empty($orderData['shipping']['firstName']) || !empty($orderData['shipping']['lastName'])) {
+        $customerName = trim(($orderData['shipping']['firstName'] ?? '') . ' ' . ($orderData['shipping']['lastName'] ?? ''));
+    }
+
+    if ($customerName) {
+        $adminMessage .= "Customer: {$customerName}\n";
+    }
     $adminMessage .= "Dog: {$orderData['dogName']}\n";
-    $adminMessage .= "Total: $" . number_format($orderData['totals']['total'], 2) . "\n";
+
+    // Add contact info for consultations
+    if ($isConsultation && isset($data['contactMethod']) && isset($data['contactInfo'])) {
+        $adminMessage .= "Contact via " . $data['contactMethod'] . ": " . $data['contactInfo'] . "\n";
+    }
+
+    if (!$isConsultation) {
+        $adminMessage .= "Total: $" . number_format($orderData['totals']['total'], 2) . "\n";
+    }
     $adminMessage .= "Mode: " . ($orderData['mode'] ?? 'Existing portrait') . "\n\n";
     $adminMessage .= "View in admin panel: https://pupartportraits.com/admin.html";
     @mail($adminEmail, $adminSubject, $adminMessage, $headers);
 
     // Send SMS notification if configured
-    if (defined('ADMIN_SMS')) {
+    if (defined('ADMIN_SMS') && !$isConsultation) {
         $smsMessage = "New PupArt Order!\n";
-        $smsMessage .= "{$shipping['firstName']} {$shipping['lastName']}\n";
+        if ($customerName) {
+            $smsMessage .= "{$customerName}\n";
+        }
         $smsMessage .= "Dog: {$orderData['dogName']}\n";
         $smsMessage .= "Total: $" . number_format($orderData['totals']['total'], 2);
         @mail(ADMIN_SMS, "Order {$orderId}", $smsMessage, $headers);
